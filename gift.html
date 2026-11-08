@@ -1,0 +1,3037 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>流浪国际天赋宝典</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+
+        :root {
+            --背景色: #171717;
+            --卡片背景: #222222;
+            --边框色: #383838;
+            --主文字: #e6e6e6;
+            --次文字: #aaaaaa;
+            --引用文字: #9cdcfe;
+            --备注文字: #aaaa66;
+            --输入背景: #2c2c2c;
+            --输入边框: #444444;
+            --焦点色: #ffc952;
+            --弹窗背景: #292929;
+            --标签普通: #444444;
+            --标签激活: #ffc952;
+            --阴影: rgba(0, 0, 0, 0.35);
+            --面板透明: rgba(34, 34, 34, 0.72);
+            --弹窗透明: rgba(41, 41, 41, 0.86);
+            --高光内描边: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            --光晕1: rgba(255, 201, 82, 0.09);
+            --光晕2: rgba(96, 165, 255, 0.09);
+            --网格线: rgba(255, 255, 255, 0.03);
+            --发光: 0 0 14px currentColor;
+            --发光弱: 0 0 8px currentColor;
+            --弹窗阴影: 0 12px 32px rgba(0, 0, 0, 0.45);
+        }
+
+        body.亮色模式 {
+            --背景色: #ffffff;
+            --卡片背景: #f7f7f7;
+            --边框色: #cccccc;
+            --主文字: #222222;
+            --次文字: #666666;
+            --引用文字: #004499;
+            --备注文字: #776600;
+            --输入背景: #ffffff;
+            --输入边框: #bbbbbb;
+            --焦点色: #dd8800;
+            --弹窗背景: #fff;
+            --标签普通: #dddddd;
+            --标签激活: #ffc952;
+            --阴影: rgba(0, 0, 0, 0.12);
+            --面板透明: rgba(247, 247, 247, 0.78);
+            --弹窗透明: rgba(255, 255, 255, 0.9);
+            --高光内描边: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+            --光晕1: rgba(221, 136, 0, 0.08);
+            --光晕2: rgba(0, 100, 220, 0.07);
+            --网格线: rgba(0, 0, 0, 0.035);
+            --发光: none;
+            --发光弱: none;
+            --弹窗阴影: 0 12px 32px rgba(0, 0, 0, 0.16);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--背景色);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--边框色);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--次文字);
+        }
+
+        body {
+            background-color: var(--背景色);
+            background-image:
+                linear-gradient(var(--网格线) 1px, transparent 1px),
+                linear-gradient(90deg, var(--网格线) 1px, transparent 1px),
+                radial-gradient(900px 500px at 85% -8%, var(--光晕1), transparent 65%),
+                radial-gradient(800px 460px at -8% 108%, var(--光晕2), transparent 65%);
+            background-size: 34px 34px, 34px 34px, auto, auto;
+            background-attachment: fixed;
+            color: var(--主文字);
+            padding: 20px;
+            line-height: 1.7;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .容器 {
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        .头部栏 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .按钮组 {
+            display: flex;
+            gap: 8px;
+        }
+
+        .标题区 {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            flex: 1;
+            min-width: 220px;
+        }
+
+        h2 {
+            background: linear-gradient(92deg, var(--主文字) 5%, var(--焦点色) 60%, var(--焦点色) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        #切换明暗按钮,
+        #清空筛选按钮 {
+            padding: 6px 14px;
+            background: var(--面板透明);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--边框色);
+            color: var(--主文字);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--高光内描边);
+        }
+
+        #切换明暗按钮:hover,
+        #清空筛选按钮:hover {
+            border-color: var(--焦点色);
+            transform: translateY(-1px);
+            box-shadow: var(--高光内描边), 0 4px 14px var(--阴影), 0 0 0 1px color-mix(in srgb, var(--焦点色) 30%, transparent);
+        }
+
+        #切换明暗按钮:active,
+        #清空筛选按钮:active {
+            transform: translateY(0) scale(0.97);
+        }
+
+        .统计区 {
+            margin-bottom: 12px;
+        }
+
+        .筛选状态提示 {
+            font-size: 14px;
+            color: var(--次文字);
+            margin-bottom: 8px;
+            min-height: 20px;
+        }
+
+        .筛选状态提示 b {
+            color: var(--焦点色);
+            font-weight: 600;
+        }
+
+        .分布条标题 {
+            font-size: 11px;
+            color: var(--次文字);
+            margin-bottom: 4px;
+            letter-spacing: 1px;
+        }
+
+        .潜力分布条 {
+            display: flex;
+            height: 8px;
+            gap: 2px;
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--标签普通);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+        }
+
+        .分布段 {
+            height: 100%;
+            border-radius: 2px;
+            min-width: 0;
+            transition: filter 0.2s ease;
+        }
+
+        .分布段:hover {
+            filter: brightness(1.3);
+        }
+
+        .筛选栏,
+        .搜索区域 {
+            background: var(--面板透明);
+            backdrop-filter: blur(12px) saturate(1.25);
+            -webkit-backdrop-filter: blur(12px) saturate(1.25);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 1px solid var(--边框色);
+            box-shadow: var(--高光内描边), 0 4px 16px var(--阴影);
+        }
+
+        .筛选栏 {
+            position: relative;
+        }
+
+        .筛选栏 #清空筛选按钮 {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 2;
+        }
+
+        .搜索区域 {
+            margin-bottom: 20px;
+        }
+
+        .筛选分组 {
+            margin-bottom: 12px;
+        }
+
+        .筛选分组:last-child {
+            margin-bottom: 0;
+        }
+
+        .筛选分组>span {
+            display: inline-block;
+            margin-right: 8px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            font-size: 14px;
+        }
+
+        .标签按钮组 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .标签按钮 {
+            padding: 5px 10px;
+            border-radius: 7px;
+            border: 1px solid var(--边框色);
+            background: var(--标签普通);
+            color: var(--主文字);
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.18s ease;
+        }
+
+        .标签按钮:hover {
+            border-color: var(--焦点色);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px var(--阴影);
+        }
+
+        .标签按钮:active {
+            transform: scale(0.96);
+        }
+
+        .标签按钮.选中.普通标签 {
+            background: var(--标签激活);
+            color: #111;
+            border-color: var(--标签激活);
+            box-shadow: 0 0 10px color-mix(in srgb, var(--标签激活) 45%, transparent);
+        }
+
+        .标签按钮.选中.艺术标签按钮 {
+            background: linear-gradient(135deg, rgba(179, 136, 255, 0.6), rgba(77, 208, 225, 0.6));
+            color: #fff;
+            border-color: rgba(179, 136, 255, 0.85);
+            box-shadow: 0 0 10px rgba(179, 136, 255, 0.55);
+        }
+
+        .标签按钮.选中.天工标签按钮 {
+            background: linear-gradient(120deg, #FFD700, #FFF8DC, #FFA500, #FFD700);
+            background-size: 200% 100%;
+            color: #3a2400;
+            border-color: #FFD700;
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.65);
+            animation: 金色流光 3s linear infinite;
+        }
+
+        .标签按钮.选中.圣哲芳规标签按钮 {
+            background: #008080;
+            color: #eafffd;
+            border-color: #00b0b0;
+            box-shadow: 0 0 12px rgba(0, 128, 128, 0.65);
+        }
+
+        .标签按钮.选中.狂愚覆辙标签按钮 {
+            background: #c04000;
+            color: #fff0e6;
+            border-color: #e05500;
+            box-shadow: 0 0 12px rgba(192, 64, 0, 0.65);
+        }
+
+        @keyframes 金色流光 {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        .标签计数 {
+            display: inline-block;
+            margin-left: 5px;
+            font-size: 10px;
+            line-height: 1;
+            padding: 2px 5px;
+            border-radius: 8px;
+            background: rgba(127, 127, 127, 0.28);
+            color: var(--次文字);
+            vertical-align: 1px;
+        }
+
+        .标签按钮.选中 .标签计数 {
+            background: rgba(0, 0, 0, 0.16);
+            color: #333;
+        }
+
+        #搜索输入框 {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 16px;
+            background: var(--输入背景);
+            border: 1px solid var(--输入边框);
+            color: var(--主文字);
+            border-radius: 8px;
+            outline: none;
+            transition: 0.2s;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        #搜索输入框:focus {
+            border-color: var(--焦点色);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--焦点色) 20%, transparent), inset 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .天赋名字卡片 {
+            background: var(--面板透明);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--边框色);
+            border-radius: 9px;
+            padding: 10px 14px;
+            display: inline-block;
+            position: relative;
+            margin: 6px;
+            /* 限制浏览器重绘/回流范围，滚动时显著减少合成开销 */
+            contain: layout style paint;
+            cursor: pointer;
+            /* 卡片文字不可选中：避免长按触发系统「复制/选择文字」 */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.22s cubic-bezier(.2, .9, .3, 1.2), box-shadow 0.22s ease, border-color 0.22s ease;
+            box-shadow: var(--高光内描边), 0 2px 6px var(--阴影);
+            animation: 卡片入场 0.4s ease backwards;
+        }
+
+        .天赋名字卡片:hover {
+            transform: translateY(-3px) scale(1.03);
+            border-color: color-mix(in srgb, var(--焦点色) 70%, var(--边框色));
+            box-shadow: var(--高光内描边), 0 8px 20px var(--阴影), 0 0 0 1px color-mix(in srgb, var(--焦点色) 35%, transparent);
+            z-index: 1;
+        }
+
+        .天赋名字卡片>span {
+            text-shadow: var(--发光弱);
+        }
+
+        .天赋名字卡片.键盘选中 {
+            border-color: var(--焦点色);
+            box-shadow: 0 0 0 2px color-mix(in srgb, var(--焦点色) 45%, transparent), 0 6px 16px var(--阴影);
+            transform: translateY(-2px);
+        }
+
+        .天赋名字卡片.艺术卡片 {
+            border: 1px solid transparent;
+            background:
+                linear-gradient(var(--面板透明), var(--面板透明)) padding-box,
+                linear-gradient(135deg, #b388ff, #4dd0e1 55%, #ffd54f) border-box;
+            box-shadow: 0 2px 6px var(--阴影), 0 0 12px rgba(179, 136, 255, 0.20);
+        }
+
+        .天赋名字卡片.艺术卡片:hover {
+            border-color: transparent;
+            box-shadow: 0 0 0 1px rgba(179, 136, 255, 0.5), 0 8px 20px var(--阴影), 0 0 18px rgba(179, 136, 255, 0.35);
+        }
+
+        .天赋名字卡片.天工卡片 {
+            border: 1px solid transparent;
+            background:
+                linear-gradient(var(--面板透明), var(--面板透明)) padding-box,
+                linear-gradient(120deg, #FFD700, #FFF8DC, #FFA500, #FFD700) border-box;
+            background-size: 200% 100%, 200% 100%;
+            box-shadow: 0 2px 6px var(--阴影), 0 0 14px rgba(255, 215, 0, 0.30);
+            animation: 金色流光 3s linear infinite;
+        }
+
+        .天赋名字卡片.天工卡片:hover {
+            border-color: transparent;
+            box-shadow: 0 0 0 1px rgba(255, 215, 0, 0.6), 0 8px 20px var(--阴影), 0 0 22px rgba(255, 215, 0, 0.50);
+        }
+
+        .天赋名字卡片.搭配选中 {
+            border-color: var(--焦点色);
+            box-shadow: 0 0 0 2px color-mix(in srgb, var(--焦点色) 55%, transparent), 0 4px 12px var(--阴影);
+            transform: translateY(-2px);
+        }
+
+        .天赋名字卡片.搭配选中::after {
+            content: "✓";
+            position: absolute;
+            top: 2px;
+            right: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--焦点色);
+        }
+
+        @keyframes 不可选抖动 {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-4px);
+            }
+
+            75% {
+                transform: translateX(4px);
+            }
+        }
+
+        .天赋名字卡片.不可选抖动 {
+            animation: 不可选抖动 0.3s ease;
+            border-color: rgba(255, 120, 120, 0.6);
+        }
+
+        .搭配栏 {
+            background: var(--面板透明);
+            backdrop-filter: blur(12px) saturate(1.25);
+            -webkit-backdrop-filter: blur(12px) saturate(1.25);
+            border: 1px solid var(--边框色);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            box-shadow: var(--高光内描边), 0 4px 16px var(--阴影);
+        }
+
+        .搭配头部 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .搭配标题 {
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 15px;
+            background: linear-gradient(92deg, var(--焦点色), #ff7a3d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .搭配清空 {
+            padding: 3px 12px;
+            font-size: 12px;
+            background: var(--标签普通);
+            border: 1px solid var(--边框色);
+            color: var(--主文字);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.18s ease;
+        }
+
+        .搭配清空:hover {
+            border-color: var(--焦点色);
+            transform: translateY(-1px);
+        }
+
+        .搭配已选 {
+            min-height: 26px;
+            line-height: 1.8;
+        }
+
+        .搭配空提示 {
+            color: var(--次文字);
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        .搭配项 {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--标签普通);
+            border: 1px solid var(--边框色);
+            border-radius: 16px;
+            padding: 2px 10px;
+            margin: 2px 6px 2px 0;
+            font-size: 13px;
+        }
+
+        .搭配项 i {
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        .搭配总计 {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--次文字);
+            border-top: 1px dashed var(--边框色);
+            padding-top: 8px;
+        }
+
+        .搭配总计 b {
+            font-size: 18px;
+            color: var(--焦点色);
+            font-weight: bold;
+        }
+
+        @keyframes 卡片入场 {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .天赋弹窗 {
+            position: fixed;
+            z-index: 999;
+            width: 340px;
+            max-width: calc(100vw - 20px);
+            height: auto;
+            max-height: calc(100vh - 24px);
+            max-height: calc(100dvh - 24px);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: var(--弹窗透明);
+            backdrop-filter: blur(16px) saturate(1.35);
+            -webkit-backdrop-filter: blur(16px) saturate(1.35);
+            border: 1px solid var(--边框色);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: var(--高光内描边), var(--弹窗阴影);
+            pointer-events: none;
+            opacity: 0;
+            transform-origin: top center;
+            transform: translateY(8px) scale(0.96);
+            transition: opacity 0.18s ease, transform 0.22s cubic-bezier(.2, .9, .3, 1.2);
+        }
+
+        /* 电脑端使用更大的弹窗 */
+        @media (min-width: 768px) {
+            .天赋弹窗 {
+                width: 460px;
+                padding: 20px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .天赋弹窗 {
+                width: 540px;
+                padding: 22px;
+            }
+        }
+
+        .天赋弹窗.显示 {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        .弹窗滚动区 {
+            flex: 1 1 auto;
+            min-height: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+            padding-right: 2px;
+        }
+
+        .天赋弹窗.艺术弹窗 {
+            box-shadow: var(--高光内描边), var(--弹窗阴影), 0 0 26px rgba(179, 136, 255, 0.20);
+        }
+
+        .天赋弹窗.天工弹窗 {
+            box-shadow: var(--高光内描边), var(--弹窗阴影), 0 0 30px rgba(255, 215, 0, 0.30);
+        }
+
+        .弹窗关闭按钮 {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            width: 26px;
+            height: 26px;
+            font-size: 20px;
+            line-height: 24px;
+            text-align: center;
+            cursor: pointer;
+            color: var(--次文字);
+            border-radius: 6px;
+            user-select: none;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .弹窗关闭按钮:hover {
+            background: var(--边框色);
+            color: var(--主文字);
+            transform: rotate(90deg);
+        }
+
+        .弹窗头部 {
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .弹窗名称题记行 {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+
+        .弹窗天赋名称 {
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: var(--发光);
+            flex-shrink: 0;
+        }
+
+        .弹窗题记 {
+            color: var(--引用文字);
+            font-style: italic;
+            opacity: 0.92;
+            font-size: 14px;
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+
+        .弹窗标签消耗行 {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+
+        .弹窗标签行 {
+            flex-shrink: 0;
+        }
+
+        .弹窗潜力标记 {
+            font-size: 13px;
+            color: var(--次文字);
+            letter-spacing: 0.5px;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .标签 {
+            display: inline-block;
+            font-size: 12px;
+            padding: 2px 8px;
+            background: rgba(127, 127, 127, 0.22);
+            border: 1px solid rgba(127, 127, 127, 0.3);
+            border-radius: 20px;
+            margin-right: 4px;
+            color: var(--主文字);
+            letter-spacing: 0.3px;
+        }
+
+        .标签.艺术标签 {
+            background: linear-gradient(135deg, rgba(179, 136, 255, 0.35), rgba(77, 208, 225, 0.35));
+            border-color: rgba(179, 136, 255, 0.5);
+            color: #e8dfff;
+        }
+
+        body.亮色模式 .标签.艺术标签 {
+            color: #5a3aa0;
+            background: linear-gradient(135deg, rgba(179, 136, 255, 0.28), rgba(77, 208, 225, 0.28));
+        }
+
+        .标签.天工标签 {
+            background: linear-gradient(120deg, rgba(255, 215, 0, 0.45), rgba(255, 248, 220, 0.45), rgba(255, 165, 0, 0.45), rgba(255, 215, 0, 0.45));
+            background-size: 200% 100%;
+            border-color: rgba(255, 215, 0, 0.65);
+            color: #fff4c2;
+            animation: 金色流光 3s linear infinite;
+        }
+
+        body.亮色模式 .标签.天工标签 {
+            color: #6b4a00;
+            background: linear-gradient(120deg, rgba(255, 215, 0, 0.35), rgba(255, 248, 220, 0.35), rgba(255, 165, 0, 0.35), rgba(255, 215, 0, 0.35));
+            background-size: 200% 100%;
+        }
+
+        .标签.圣哲芳规标签 {
+            background: #008080;
+            border-color: #00a8a8;
+            color: #eafffd;
+            text-shadow: 0 0 6px rgba(0, 128, 128, 0.8);
+        }
+
+        body.亮色模式 .标签.圣哲芳规标签 {
+            background: rgba(0, 128, 128, 0.16);
+            border-color: rgba(0, 128, 128, 0.55);
+            color: #005f5f;
+            text-shadow: none;
+        }
+
+        .标签.狂愚覆辙标签 {
+            background: #c04000;
+            border-color: #e05500;
+            color: #fff0e6;
+            text-shadow: 0 0 6px rgba(192, 64, 0, 0.8);
+        }
+
+        body.亮色模式 .标签.狂愚覆辙标签 {
+            background: rgba(192, 64, 0, 0.14);
+            border-color: rgba(192, 64, 0, 0.5);
+            color: #8f3000;
+            text-shadow: none;
+        }
+
+        .弹窗描述 {
+            color: var(--主文字);
+            margin-bottom: 8px;
+            line-height: 1.75;
+        }
+
+        .弹窗备注 {
+            color: var(--备注文字);
+            font-size: 14px;
+            background: rgba(127, 127, 127, 0.12);
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin-top: 4px;
+        }
+
+        mark {
+            background: rgba(255, 201, 82, 0.30);
+            color: inherit;
+            border-radius: 3px;
+            padding: 0 2px;
+            box-shadow: 0 0 0 1px rgba(255, 201, 82, 0.3);
+        }
+
+        body.亮色模式 mark {
+            background: rgba(221, 136, 0, 0.22);
+            box-shadow: 0 0 0 1px rgba(221, 136, 0, 0.25);
+        }
+
+        .无结果提示 {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--次文字);
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .页脚提示 {
+            text-align: center;
+            margin-top: 36px;
+            font-size: 12px;
+            color: var(--次文字);
+            opacity: 0.75;
+            letter-spacing: 0.5px;
+        }
+
+        .页脚提示 kbd {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--边框色);
+            background: var(--标签普通);
+            font-family: inherit;
+            font-size: 11px;
+            color: var(--主文字);
+            margin: 0 2px;
+        }
+
+        @media (max-width: 768px),
+        (pointer: coarse) {
+            .页脚提示 {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="容器">
+        <div class="头部栏">
+            <div class="标题区">
+                <h2>流浪国际天赋宝典</h2>
+            </div>
+            <div class="按钮组">
+                <button id="切换明暗按钮">切换亮/暗色</button>
+            </div>
+        </div>
+        <div class="统计区">
+            <div class="筛选状态提示" id="筛选状态文本"></div>
+            <div class="分布条标题" id="分布条标题">潜力分布</div>
+            <div class="潜力分布条" id="潜力分布条"></div>
+        </div>
+
+        <div class="搭配栏" id="搭配栏">
+            <div class="搭配头部">
+                <span class="搭配标题">天赋搭配</span>
+                <button class="搭配清空" id="搭配清空按钮">清空</button>
+            </div>
+            <div class="搭配已选" id="搭配已选"></div>
+            <div class="搭配总计"><span id="搭配总计标签">总潜力消耗：</span><b id="搭配总计">0</b></div>
+        </div>
+        <div class="筛选栏">
+            <button id="清空筛选按钮">清空筛选</button>
+            <div class="筛选分组">
+                <span id="潜力筛选标签">潜力筛选：</span>
+                <div class="标签按钮组" id="潜力标签组"></div>
+            </div>
+            <div class="筛选分组">
+                <span>标签筛选：</span>
+                <div class="标签按钮组" id="普通标签组"></div>
+            </div>
+        </div>
+
+        <div class="搜索区域">
+            <input id="搜索输入框" placeholder="搜索：天赋名 / 题记 / 描述 / 联想 ">
+        </div>
+
+        <div id="天赋列表容器"></div>
+
+        <div class="页脚提示">按 <kbd>←</kbd> <kbd>→</kbd> 切换天赋 · <kbd>Enter</kbd> 固定查看 · <kbd>Esc</kbd> 关闭</div>
+    </div>
+    <div class="天赋弹窗" id="全局弹窗">
+        <div class="弹窗关闭按钮">×</div>
+        <div class="弹窗滚动区">
+            <div class="弹窗头部">
+                <div class="弹窗名称题记行">
+                    <span class="弹窗天赋名称"></span>
+                    <span class="弹窗题记"></span>
+                </div>
+                <div class="弹窗标签消耗行">
+                    <span class="弹窗标签行"></span>
+                    <span class="弹窗潜力标记"></span>
+                </div>
+            </div>
+            <div class="弹窗描述"></div>
+            <div class="弹窗引用" style="color:#9cdcfe;font-size:13px;margin-top:4px;line-height:1.6"></div>
+            <div class="弹窗提到" style="color:#c586c0;font-size:13px;margin-top:2px;line-height:1.6"></div>
+            <div class="弹窗备注"></div>
+        </div>
+    </div>
+
+    <script>
+
+        function 格式化潜力(潜力值) {
+            if (潜力值 === Infinity) return "∞";
+            if (潜力值 === -Infinity) return "-∞";
+            return String(潜力值);
+        }
+
+        const 潜力颜色对照表 = [
+            { 潜力: -6, 颜色: "#800080", 名称: "魔堕紫" },
+            { 潜力: -5, 颜色: "#800000", 名称: "酒红色" },
+            { 潜力: -4, 颜色: "#c00000", 名称: "暗红色" },
+            { 潜力: -3, 颜色: "#ff0000", 名称: "纯红色" },
+            { 潜力: -2, 颜色: "#ff4040", 名称: "浅红色" },
+            { 潜力: -1, 颜色: "#ff8080", 名称: "肉红色" },
+            { 潜力: 0, 颜色: "#FFFFFF", 名称: "纯白色" },
+            { 潜力: 1, 颜色: "#008000", 名称: "深绿色" },
+            { 潜力: 2, 颜色: "#00c000", 名称: "翠绿色" },
+            { 潜力: 3, 颜色: "#00ff00", 名称: "纯绿色" },
+            { 潜力: 4, 颜色: "#40ff40", 名称: "浅草绿" },
+            { 潜力: 5, 颜色: "#80ff80", 名称: "薄荷绿" },
+            { 潜力: 6, 颜色: "#FFD700", 名称: "神启金" }];
+
+        function 获取潜力颜色(潜力值) {
+            let 匹配项 = 潜力颜色对照表.find(项 => 项.潜力 === 潜力值);
+            let 颜色;
+            if (匹配项) 颜色 = 匹配项.颜色;
+            else if (潜力值 < -5) 颜色 = "#800080";
+            else if (潜力值 > 5) 颜色 = "#FFD700";
+            else 颜色 = "#ffffff";
+            if (潜力值 === 0 && document.body.classList.contains("亮色模式")) 颜色 = "#808080";
+            return 颜色;
+        }
+
+        function 获取文字颜色(颜色值) {
+            const 红 = parseInt(颜色值.slice(1, 3), 16);
+            const 绿 = parseInt(颜色值.slice(3, 5), 16);
+            const 蓝 = parseInt(颜色值.slice(5, 7), 16);
+            const 亮度 = (红 * 299 + 绿 * 587 + 蓝 * 114) / 1000;
+            return 亮度 > 150 ? "#000000" : "#ffffff";
+        }
+
+        const 天赋表 = {
+            "夜短梦少": {
+                题记: "月落乌啼霜满天，江枫渔火对愁眠",
+                描述: "跳过除天数增加和精力恢复外，每日结算界面可能显示的结算",
+                备注: "即跳过【饥饿】【陷阱】【自愈】【爱心】【监督】【不开森】【出售】【兴奋消退】【失眠】【不屈的精神力】【┑(=^ ω^=)┑】【捡钱】【烟瘾发作】相关结算。游戏内表现为跳过整个页面显示，点击睡觉后若无日记或剧情，则直接恢复精力和增加天数，不做任何界面跳转",
+                消耗: 0,
+                引用: ["吕留良", "张继"],
+                提到: ["夜长梦多"],
+                标签: ["功能"]
+            },
+            "逆旅": {
+                题记: "人生如逆旅，我亦是行人",
+                描述: "无法前进时，可以后退",
+                备注: "看起来像神秘语录的描述却意外地简洁而准确呢<br>描述上应该覆盖【彳亍】，实际代码中特别地设置了在有且有且只有前进彳亍化的情况下不会覆盖其为[后  退]，这是为了避免无法还原[彳  亍]而被迫一退到底",
+                消耗: 0,
+                引用: ["苏轼"],
+                标签: ["功能"]
+            },
+            "直捣黄龙": {
+                题记: "鼓吹风高，画船遥想，一笑吞穷发",
+                描述: "可以：<br>①〖鼓吹风高〗进入下一地区<br>②〖画船遥想〗天数+1<br>③〖一笑吞穷发〗挑战下一BOSS（城管1队→2队→3队→4队→陈晓→挖掘机）",
+                备注: "代码上属于进食项目～<br>②会跳过剧情<br>③会在BOSS全打完的隔天直接结算胜利，开始速通挑战吧！",
+                消耗: 0,
+                引用: ["宋史", "叶梦得"],
+                提到: ["岳飞"],
+                标签: ["功能"]
+            },
+            "鸣琴垂拱": {
+                题记: "垂衣拱手，大音希声",
+                描述: "前进探索消耗精力翻5倍，抽取物资翻4倍",
+                备注: "整体是无限联想串联的：操作简便（操作量1/5）→无为而治→鸣琴垂拱→大音希声→琴音<br>描述没说的是，触发事件或战斗时会有三国杀诸葛亮空城的琴声音效",
+                消耗: 0,
+                共创: "灵尘",
+                引用: ["吕氏春秋"],
+                标签: ["成长"]
+            },
+            "画饼充饥": {
+                题记: "前有大梅林，饶子，甘酸可以解渴",
+                描述: "游戏更新后，获得调整或新增的天赋",
+                备注: "一看更新公告：游戏正面负面天赋数量长期失调，因此本次更新了大量新负面天赋",
+                消耗: 0,
+                引用: ["三国志", "曹操"],
+                提到: ["望梅止渴"],
+                标签: ["特殊"]
+            },
+            "盗版国际": {
+                题记: "我不盗你们玩什么啊",
+                描述: "项目头增加“盗版·”前缀<br>人名做以下避讳处理：<br>晓月→晓曰   碧瑶→碧讳谣<br>杨世军→杨弑君   吴晓雪→江晓雪<br>晓风→不晓风   陈晓→陈日尧<br>你可以进行〖无米之炊〗（用「木材」*4直接合成「熟肉」）<br>预选此天赋时，正面天赋相关信息不可见，潜力点改称感动值",
+                备注: "浩辰提供题记灵感辛苦了<br>灵感来源是Rice声称我抄他码了——原话是国际版是重制版改几个变量名做成的",
+                消耗: 0,
+                引用: ["浩辰"],
+                提到: ["Rice"],
+                标签: ["功能", "特殊"]
+            },
+            "打草惊蛇": {
+                题记: "石危偏骇马，草动数惊蛇",
+                描述: "前进探索“什么也没发现”时，改为触发敌人先手的遭遇战",
+                备注: "会终止原结算",
+                消耗: 0,
+                引用: ["王鲁", "李梦阳"],
+                标签: ["成长"]
+            },
+            "乘人之危": {
+                题记: "屋漏更遭连夜雨，船迟又遇打头风",
+                描述: "遭遇战概率×2×相对已损失生命",
+                备注: "趁你病要你命",
+                消耗: 0,
+                引用: ["盖勋", "高明"],
+                标签: ["成长"]
+            },
+            "百变马丁": {
+                题记: "马丁马丁，有个角色在等待～",
+                描述: "每天开始时，其他天赋变为随机同价位天赋",
+                备注: "燕昭王想招揽天下贤才，向郭隗请教。郭隗说：如果大王真要求贤，就先从我郭隗开始。如果我郭隗尚且被重用，何况那些比我贤能的人呢？",
+                消耗: 0,
+                共创: "......",
+                引用: ["百变马丁"],
+                标签: ["特殊"]
+            },
+            若自: {
+                题记: "以不变应万变",
+                描述: "每个事件自动选择上次选项；\n每场战斗自动执行上次行动",
+                备注: "【若自】如此，何必当初！",
+                消耗: 0,
+                标签: ["功能"]
+            },
+            "真·画饼充饥": {
+                题记: "前有大梅林，饶子，甘酸可以解渴",
+                描述: "获得所有艺术天赋",
+                备注: "流浪国际是空想社会主义？",
+                消耗: 0,
+                引用: ["三国志", "曹操"],
+                提到: ["望梅止渴"],
+                标签: ["特殊"]
+            },
+            "赌怪": {
+                题记: "风险，只是机遇的另一个名字！",
+                描述: "投资、押宝无金额上限<br>原押宝改为公共事件，一半的打工事件替换为押宝<br>拥有「典当」功能；拥有「贷款」功能",
+                备注: "主界面信息框点击金钱即备案资产，备案资产的一半是贷款上限，共有三个贷款窗口，但是不支持以贷借贷~",
+                消耗: 1,
+                共创: "灵尘",
+                引用: ["太空杀"],
+                提到: ["双面人"],
+                标签: ["功能"]
+            },
+            "炼化": {
+                题记: "吸天地之灵气，纳日月之精华",
+                描述: "「生肉」可食用（饥饿+20，随机属性+1；饥饿满时也可食用，此时健康-1，全属性+3）<br>自动进食优先服用「生肉」",
+                备注: "自动进食优先级低于【回味无穷】",
+                消耗: 1,
+                标签: ["功能"]
+            },
+            "扬威": {
+                题记: "刚才还是太收敛了",
+                描述: "X为击败敌方次数：造成伤害+X/(X+1)倍",
+                备注: "那是除号，不是选择分支！设计上，倍数无限趋近1，确实是“收敛”的",
+                消耗: 1,
+                标签: ["战斗"]
+            },
+            "逢源": {
+                题记: "山重水复疑无路，柳暗花明又一村",
+                描述: "前进探索的结果改为在两个预测结果中选择",
+                备注: "游戏内表现为，前进探索必定触发虚拟事件，弹出文本：<br>「前路出现分岔，两条道路将带来不同际遇：一条是【结果一】，一条是【结果二】。你要选择走哪一条岔路？」<br>若候选结果为事件/战斗，仅展示事件名称、敌人名称；若为物资奖励，则展示具体掉落内容（直接预测响应各种修正后结果）<br>顺带一提，0‑1区间随机数的数学期望为0.5。若取两组该随机数中较大值，期望约为0.67<br>其实算是足够强力的天赋，只消耗1潜力是因为你将付出更多操作的时间成本（笑）",
+                消耗: 1,
+                引用: ["孟子", "陆游"],
+                提到: ["左右"],
+                标签: ["成长"]
+            },
+            "儒雅贯时": {
+                名称: "<ruby>儒<rt>rū</rt></ruby>雅<ruby>贯<rt>guǎn</rt></ruby>时",
+                题记: "此举有伤大雅，望君自重",
+                描述: "生命小于25%时，无法前进探索；生命大于80%时，战斗胜利必定触发「幸运石」<br>我们必须相信西（西服）装是体面的：<br>战斗胜利后，获得1元直到下次战斗失败",
+                备注: "加缪《西西弗神话》结尾说“我们必须想象西西弗斯是幸福的。”<br>而「西装」是隔壁的装备，效果是战斗胜利后获得1毛",
+                消耗: 1,
+                提到: ["西西弗斯"],
+                标签: ["成长"]
+            },
+            "回光": {
+                题记: "余火凝微芒，以此回光",
+                描述: "战斗失败时，执行一个额外回合",
+                备注: "灵感来源于三国杀移动端神姜维",
+                消耗: 1,
+                提到: ["姜维"],
+                标签: ["战斗"]
+            },
+            "坦然": {
+                题记: "归去，也无风雨也无晴",
+                描述: "战斗失败后，精力+10<br>前进探索生命恢复量*X（X为健康）",
+                备注: "非常有神性的数值表达，但也仅限于此了",
+                消耗: 1,
+                引用: ["苏轼"],
+                标签: ["成长"]
+            },
+            "逆命": {
+                题记: "命数阻挠，亦胜天半子",
+                描述: "剧情战敌人(最大)生命和掉落数量增加X倍（X为剧情战曾胜利数）",
+                备注: "沙包而已",
+                消耗: 1,
+                共创: "灵尘",
+                标签: ["成长", "战斗"]
+            },
+            "浪淘沙": {
+                题记: "千淘万漉虽辛苦，吹尽狂沙始到金",
+                描述: "前进探索消耗和收获各有50%概率为无",
+                备注: "变着花样加强「晓月手链」属于是",
+                消耗: 1,
+                引用: ["刘禹锡"],
+                标签: ["成长"]
+            },
+            "粗制滥造": {
+                题记: "金玉其外，败絮其中",
+                描述: "装备技能结算后，装备等级-1，返还一半升级材料",
+                备注: "和【大巧不工】有合法联动",
+                消耗: 1,
+                引用: ["鲁迅", "刘伯温"],
+                标签: ["成长"]
+            },
+            "蒸蒸日上": {
+                题记: "莫愁前路无知己，天下谁人不识君",
+                描述: "每天开始时，获得等同拥有致敬《三国杀》天赋数的「蒸」<br>可消耗100个「蒸」以获得随机天赋",
+                备注: "我游蒸蒸日上！",
+                消耗: 1,
+                引用: ["三国杀", "高适"],
+                提到: ["游卡"],
+                标签: ["特殊", "圣哲芳规"]
+            },
+            "指鹿为马": {
+                题记: "望夷宫中鹿为马，秦人半死长城下",
+                描述: "可将字词替换为另一字词显示",
+                备注: "数组存储，格式「xx→xx」。显示某字段时，若有「A→B」映射，则显示B字段当前值",
+                消耗: 1,
+                引用: ["司马迁", "王安石"],
+                提到: ["赵高"],
+                标签: ["功能"]
+            },
+            "氓之蚩蚩": {
+                题记: "言既遂矣，至于暴矣",
+                描述: "伙伴不在队伍中时可以交互，在队伍中时不可交互",
+                备注: "渣男天赋能和【悠悠我心】联动其实挺不合理的",
+                消耗: 1,
+                引用: ["诗经"],
+                标签: ["功能"]
+            },
+            "摧枯拉朽": {
+                题记: "疾风知劲草，板荡识诚臣！",
+                描述: "无视敌方X%的攻击和防御（X%为敌方相对已损失生命）",
+                备注: "唐太宗没排面？请看【十思】",
+                消耗: 2,
+                引用: ["邓骞", "李世民"],
+                提到: ["甘卓"],
+                标签: ["战斗"]
+            },
+            "时运": {
+                题记: "长风破浪会有时，直挂云帆济沧海",
+                描述: "物品抽取结果不为空",
+                备注: "具体来说，掉落物存在且物品抽取为空（即显示“什么也没发现”）则重新执行抽取逻辑直到成功抽到任意物品",
+                消耗: 2,
+                引用: ["李白"],
+                标签: ["成长"]
+            },
+            "奋发图强": {
+                题记: "仰天大笑出门去，归来倚杖自叹息",
+                描述: "战斗失败后获得10%临时全属性加成",
+                备注: "和夜短梦少搭配有奇效",
+                消耗: 2,
+                引用: ["李白", "杜甫"],
+                提到: ["发奋图强"],
+                标签: ["战斗"]
+            },
+            "节约": {
+                题记: "半丝半缕，恒念物力维艰",
+                描述: "用药后获得「艾草」；抽烟后获得「烟草」<br>喝酒后获得「50ml啤酒」；抽奖后获得25商店积分",
+                备注: "高二时设计的",
+                消耗: 2,
+                引用: ["朱柏庐"],
+                标签: ["成长"]
+            },
+            "濨悱": {
+                名称: "<ruby>濨<rt>cí</rt>悱<rt>fěi</rt></ruby>",
+                题记: "夜深忽梦少年事，王莽恭谦未篡时",
+                描述: "每天开始时选择：前进探索 ⑴不会⑵必定 触发战斗",
+                备注: "游戏内表现为，每天开始触发一个事件：<br>“观今日气运，心中所愿是？”<br>选择一：“静途无劫，不遇匪寇妖魔”——获得“慈悲”状态<br>选项二：“杀劫随行，定有正邪交锋”——获得“滋非”（“寻衅滋事，惹是生非”的意思）状态",
+                消耗: 2,
+                引用: ["白居易"],
+                提到: ["王莽"],
+                标签: ["功能"]
+            },
+            "自若": {
+                题记: "一切尽在掌握",
+                描述: "前进/探索将重复执行直到触发事件或战斗",
+                备注: "没有实质提升，只是一个内置连点器",
+                消耗: 2,
+                标签: ["功能"]
+            },
+            "自如": {
+                题记: "人皆彳亍，唯我纵横！",
+                描述: "结束实质事件时，精力消耗返还",
+                备注: "本来就有精力返还的事件不会双倍返还",
+                消耗: 2,
+                引用: ["三国杀"],
+                提到: ["马超"],
+                标签: ["成长"]
+            },
+            "修仙": {
+                题记: "卷地风来忽吹散，飞升不如捡破烂",
+                描述: "每天开始时，若饥饿值≤0，最大生命+5%",
+                备注: "感觉还算有意思？",
+                消耗: 2,
+                引用: ["苏轼"],
+                标签: ["成长"]
+            },
+            "渐行渐远": {
+                题记: "人生南北多歧路，君向潇湘我向秦",
+                描述: "县城/山脉/省城地区，前进探索精力消耗-1/2/3",
+                备注: "字面意思",
+                消耗: 2,
+                引用: ["郑谷", "吴敬梓"],
+                标签: ["成长"]
+            },
+            "天飞": {
+                题记: "欲贯鱼兮上进，乘阳德兮天飞",
+                描述: "战斗中生命视为999999，直到受到伤害后",
+                备注: "纪念游戏以前没有技术，默认玩家先手。飞行怪设定是敌人先手，就只能写初始生命值远大于最大生命，这样玩家的第一次攻击就无实际意义，只能用攻击本身让敌人生命重置回最大生命。相当于敌人先手。而这个天赋对玩家而言时，不同的是“视为”指令无视了实际生命，只要敌人攻击你，就会帮你把生命置为最大值。所以不仅是第一次受伤免疫，还自动回血节约资源。和题记特别吉祥的意境呼应",
+                消耗: 2,
+                引用: ["萧观音"],
+                标签: ["战斗"]
+            },
+            "顾曲": {
+                题记: "弄丝调管，时误新声，翻试周郎",
+                描述: "晓月【声援】、碧瑶【保护】【刺杀】【监督】数值翻倍<br>触发上述技能时精力-1，视为与伙伴聊天一次",
+                备注: "这就是知音！",
+                消耗: 2,
+                共创: "三山三市",
+                引用: ["三国志", "贺铸"],
+                提到: ["周瑜"],
+                标签: ["成长", "战斗"]
+            },
+            "量体裁衣": {
+                题记: "增之一分则太长，减之一分则太短",
+                描述: "「木棍」「麻布衣」「黑刀」「红夹克」造价-25%<br>「匕首」「皮衣」数值+25%<br>可以〖锦上添花〗〖削足适履〗〖捉襟见肘〗",
+                备注: "问豆包“有哪些和衣服有关的成语”后设计的<br>〖削足适履〗可以消耗15攻击升级「木棍」，75最大生命升级「麻布衣」，〖捉襟见肘〗反之",
+                消耗: 2,
+                引用: ["萧道成", "宋玉"],
+                标签: ["成长", "战斗"]
+            },
+            "冲风之衰": {
+                题记: "强弩之极，矢不能穿鲁缟",
+                描述: "可以长按攻击键以连续攻击10次，然后此数值-1",
+                备注: "贯彻矛盾美学的设计",
+                消耗: 2,
+                引用: ["司马迁"],
+                标签: ["战斗"]
+            },
+            "心流": {
+                题记: "慎终如始，则无败事",
+                描述: "你触发技能后，该技能触发率+10%直到没有触发该技能",
+                备注: "低配版【顿悟】",
+                消耗: 2,
+                引用: ["老子"],
+                标签: ["成长", "战斗"]
+            },
+            "肥胆": {
+                题记: "你的胆子真是肥嘟嘟的",
+                描述: "开局解锁[挑  战]，长按[挑  战]可切换挑战目标<br>挑战胜利时，进行X次Y%成功率的判定，每成功一次战利品多一倍<br>X为越位挑战数，Y为60-天数",
+                备注: "不打听打听我是谁？",
+                消耗: 2,
+                共创: "三山三市",
+                标签: ["成长"]
+            },
+            "先知先觉": {
+                题记: "远赴人间惊鸿宴，鬼刀一开看不见",
+                描述: "战斗失败时，若逃跑率大于0，改为逃跑成功",
+                备注: "曾经消耗5潜力的天赋，因为队友没了退环境",
+                消耗: 2,
+                引用: ["孟子"],
+                标签: ["成长"]
+            },
+            "大巧不工": {
+                题记: "眨上眉毛，大巧若拙",
+                描述: "装备技能等级+素材持有量/升级需求",
+                备注: "创新点在于把技能效果和基础属性拆开，求“巧”则舍“工”，逻辑高度自洽",
+                消耗: 2,
+                共创: "三山三市",
+                引用: ["老子"],
+                标签: ["成长", "战斗"]
+            },
+            "卷土重来": {
+                题记: "谁道人生无再少？门前流水尚能西！",
+                描述: "与每种敌人战斗首次失败时，天数-1",
+                备注: "添酒回灯重开宴",
+                消耗: 2,
+                引用: ["杜牧", "苏轼"],
+                提到: ["项羽"],
+                标签: ["成长"]
+            },
+            "天钧": {
+                题记: "和之以是非，而休乎天钧",
+                描述: "技能未触发时增加X运气，否则减少(100-X)运气，X为技能触发率<br>可以让技能判定视为成功或失败（运气小于0时不可视为成功）",
+                备注: "遵循运气守恒定律",
+                消耗: 2,
+                引用: ["庄子"],
+                标签: ["战斗"]
+            },
+            "人是人非": {
+                题记: "人生若只如初见，何事秋风悲画扇",
+                描述: "挑战敌人“晓风”台词库改为“玩的就是盗版”“不用自我感动”“盗版这个名号，没什么大不了的”“ai 这你不试试吗？”“踢我干什么？”，掉落物改为「黑刀」*20",
+                备注: "真是一对苦命鸳鸯啊（泪目）",
+                消耗: 2,
+                引用: ["纳兰性德"],
+                提到: ["Rice"],
+                标签: ["特殊"]
+            },
+            "悠悠我心": {
+                题记: "只愿君心似我心，定不负相思意",
+                描述: "伙伴技能不因伙伴离队失效",
+                备注: "晓月的【不开心】也算技能哟，这就很有灵性了",
+                消耗: 2,
+                引用: ["曹操"],
+                标签: ["成长", "战斗"]
+            },
+            "蜀道难": {
+                题记: "其险也如此，嗟尔远道之人胡为乎来哉！",
+                描述: "〖开国茫然〗初始离家距离改为101km<br>位于山脉时：<br>〖天梯石栈〗前进必触发遭遇战，探索不触发遭遇战<br>〖扪参历井〗物资收益和敌人全属性+X%，X为离家距离-100<br>〖冲波逆折〗战斗失败时，离家距离-1",
+                备注: "〖开国茫然〗单独看那是真茫然——什么叫我开局就打中期地图？但加上〖天梯石栈〗的想打怪就走天梯升高，想发育就走石栈探索，开国好像又清晰了，但接下来马上说〖扪参历井〗最高全属性+200%，三倍攻击三倍防御三倍生命，等于强度翻27倍，发现80天探索没了又打不过怪，你就又该问反思“胡为乎来哉了”。读起来有起伏，真是把蜀道崎岖写进描述里了",
+                消耗: 2,
+                共创: "kokoro",
+                引用: ["李白"],
+                标签: ["成长", "战斗"]
+            },
+            "三条杠": {
+                题记: "三好学生，我骄傲我自豪",
+                描述: "攻击力+300，防御+300，生命值+300，精力上限+30<br>抽烟喝酒赌博后，失去此天赋",
+                备注: "稀有的前期天赋",
+                消耗: 2,
+                共创: "陌生人家",
+                标签: ["成长", "战斗"]
+            },
+            "承命运定": {
+                题记: "君子居易以俟命，小人行险以徼幸",
+                描述: "抽取物品改为随机同类型物品",
+                备注: "其实不能说是我设计的，有个娱乐改版是装备变为随机装备，非装备变为随机非装备",
+                消耗: 2,
+                标签: ["成长"]
+            },
+            "刷怪塔": {
+                题记: "刷怪了自己打😂",
+                描述: "陷阱获得物品改为等量次相关敌人的起床战争",
+                备注: "发现“视为”之外，“改为”这个词也挺有意思",
+                消耗: 2,
+                共创: "三山三市",
+                提到: ["我的世界"],
+                标签: ["成长"]
+            },
+            "凤燎": {
+                题记: "乘丹凤者，不堪其炙，何堪其远？",
+                描述: "视为拥有【火计】【𠤀熵】<br>因【𠤀熵】战斗失败不减少健康，恢复所有生命",
+                备注: "锦鸡时凤凰的原型，这么说，我也是凤",
+                消耗: 2,
+                引用: ["三国杀"],
+                提到: ["庞统"],
+                标签: ["战斗"]
+            },
+            "矢北": {
+                题记: "只有杀身士，绝无降曹夫！",
+                描述: "三回合内/后受到伤害后，恢复/失去等量生命",
+                备注: "山不厌高，海不厌深。周公吐哺，天下归心",
+                消耗: 2,
+                共创: "陌生人家",
+                引用: ["三国杀"],
+                提到: ["沮授"],
+                标签: ["战斗"]
+            },
+            "顿悟": {
+                题记: "问渠那得清如许？铁马冰河入梦来",
+                描述: "触发概率大于等于50%的技能必定触发",
+                备注: "问他赢了输了，他说：“悟了”",
+                消耗: 3,
+                引用: ["朱熹", "陆游"],
+                标签: ["成长", "战斗"]
+            },
+            "一举两得": {
+                题记: "生来自有拿云手，不向人间拜下风",
+                描述: "抽取物品流程额外进行一次",
+                备注: "本来叫【一举多得】的，最高十得",
+                消耗: 3,
+                标签: ["成长"]
+            },
+            "无言": {
+                题记: "汝有良策，何必问我？",
+                描述: "【格挡】对敌人技能也生效，其他技能显示为【？？】",
+                备注: "值得一提的是，由于是实质上“改为”而不是“显示为”，此天赋会影响【渐赢】条件③判定",
+                消耗: 3,
+                引用: ["三国杀"],
+                提到: ["徐庶"],
+                标签: ["战斗"]
+            },
+            "破军": {
+                题记: "若敢来犯，必叫你大败而归！",
+                描述: "对攻击、防御均不高于自身的敌人造成伤害翻倍<br>X为敌方最大生命值的5%：<br>平衡架势下，敌方攻击、防御各-X；<br>拼命架势下，敌方防御-2X；<br>猥琐架势下，敌方攻击-2X<br>以上修正不会使数值为负",
+                备注: "思考量超标，大宝果然是操作性武将<br>【破军】的修正甚至涉及某些敌人的技能，强度是有的，不过在没解锁架势之前的成长期很难受",
+                消耗: 3,
+                引用: ["三国杀"],
+                提到: ["徐盛", "大宝"],
+                标签: ["战斗"]
+            },
+            "手工技师": {
+                题记: "经纬织日月，刀笔刻春秋",
+                描述: "「黑刀」「红夹克」造价降低6<br>新增制作项目「白色粉末」<br>陷阱必定获得物资<br>拥有长按快速制作功能",
+                备注: "有点祖传手艺，可以把「亚麻」提纯为“Big麻”<br>经典后期天赋，可以电表倒转的同时操作压力大，所以增加了快速制作补偿",
+                消耗: 3,
+                标签: ["成长", "功能"]
+            },
+            "百废俱兴": {
+                题记: "先帝创业未半而中道崩殂，越明年，政通人和，百废俱兴",
+                描述: "可消耗 10ˣ 积分以第x次升级为塑料→废铁→青铜→黄金→铂金→钻石中对应顺序的会员<br>新增「黑曜石」「火狐皮」「幸运石」「放大镜」「┑(=^ ω^=)┑」商店项目<br>拥有长按快速买卖功能",
+                备注: "办卡机制由梦半何时醒设计<br>最初效果是增加项目，但渐渐有些喧宾夺主了？",
+                消耗: 3,
+                共创: "梦半何时醒",
+                引用: ["诸葛亮", "范仲淹"],
+                提到: ["刘备"],
+                标签: ["成长", "功能"]
+            },
+            "承运命定": {
+                题记: "城南城北一条街，打听打听谁是爹",
+                描述: "每天首次前进探索与首次战斗胜利抽取物资改为随机抽取",
+                备注: "被两次削弱的天赋<br>①“次”定义：屏幕同时显示的物资抽取；普通探索 + 放大镜、普通战利品 + 幸运石均计为 1 “次”<br>② 可能有产出的情况下无产出也会消耗次数，天赋生效于抽取过程，非事后修正<br>③ 【逢源】预览会考虑所有天赋效果，对于此天赋，仅实际选择获取物资时占用次数<br>④“物品”概念包括但不限于素材（木材亚麻类）、消耗品（熟肉伤药类）、装备（匕首皮衣类）、收集品（好人卡眼泪类）等几乎一切可以称得上物品的东西。而“物资”的定义是“物品”+“金钱”",
+                消耗: 3,
+                标签: ["成长"]
+            },
+            "回味无穷": {
+                题记: "若饮醇醪，不觉自醉",
+                描述: "食用「熟肉」后获得「生肉」<br>合成「香烟」的烟头消耗量减半<br>每与伙伴聊天10次，视为使用「酒」",
+                备注: "前两条是【回味无穷】的字面理解<br>而第三条来源于《三国志》记载老将程普原先不服周瑜，多次欺辱周瑜，周瑜始终不计较、处处退让。程普后来十分敬服周瑜，感慨说：“与周公瑾交，若饮醇醪，不觉自醉。”",
+                消耗: 3,
+                引用: ["程普"],
+                提到: ["周瑜"],
+                标签: ["成长"]
+            },
+            "斗转星移": {
+                题记: () => {
+                    // 正面/负面按对应时辰天赋的消耗正负判定（消耗 > 0 为正面）
+                    const 时辰天赋名 = ["嫉妒", "回味无穷", "暴怒", "色欲", "火计", "折戟", "自负", "一举两得", "智折", "贪婪", "欧皇", "懒惰"][new Date().getHours()];
+                    const 对应项 = 时辰天赋名 ? 天赋名索引.get(时辰天赋名) : null;
+                    const 消耗 = 对应项 ? 对应项.消耗 : -1;
+                    return (时辰天赋名 && 消耗 > 0)
+                        ? "乾坤得正，手摘十万星辰，不妨高声语！"
+                        : "玄象潜凝，默观碧落星河，不敢高声语！";
+                },
+                描述: "视为拥有当前时辰对应天赋：<br>子时：【嫉妒】  丑时：【回味无穷】  寅时：【暴怒】<br>卯时：【色欲】  辰时：【火计】  巳时：【折戟】<br>午时：【自负】  未时：【一举两得】  申时：【智折】<br>酉时：【贪婪】  戌时：【欧皇】  亥时：【懒惰】",
+                备注: "不作联网校验，可通过设备时间控制",
+                消耗: 3,
+                引用: ["三国杀"],
+                提到: ["司马懿"],
+                标签: ["成长", "战斗", "特殊", "圣哲芳规"]
+            },
+            "白石匣": {
+                题记: "大丈夫生于乱世，当带三尺之剑，立不世之功！",
+                描述: "与任意敌人→胡茬男→通缉犯→皮衣男→吾王→挖掘机战斗的若胜利，视为拥有【三尺青锋】中对应〖〗义项，否则失去此天赋，进入复活剧情抉择<br>若按顺序解锁义项，获得一层「砺石」效果",
+                备注: "「砺石」：【嗜血】【割裂】增伤+1%，计算青色项目/词条数+1",
+                消耗: 3,
+                共创: "三山三市",
+                引用: ["太史慈"],
+                标签: ["成长", "战斗", "圣哲芳规"]
+            },
+            "看破": {
+                题记: "你的计谋被识破了",
+                描述: "战斗界面若连续1分钟无任何操作，敌人立即逃跑",
+                备注: "被烧条吓跑了",
+                消耗: 3,
+                引用: ["三国杀"],
+                提到: ["诸葛亮", "卧龙"],
+                标签: ["战斗"]
+            },
+            "未雨绸缪": {
+                题记: "奋六世之余烈，序八州而朝同列",
+                描述: "初始地点为「家」，天数-6，离家距离为0<br>在家时可以[探  索]，「帐篷」等级视为5<br>天数小于1时不可[前  进]",
+                备注: "家为新地点，无事件，敌人同荒野，物资为荒野加县城",
+                消耗: 3,
+                引用: ["贾谊"],
+                提到: ["嬴政"],
+                标签: ["成长"]
+            },
+            "一鸣惊人": {
+                题记: "一鸣从此始，相望青云端",
+                描述: "首次获得存在高亮等级的装备时，其升级至该等级",
+                备注: "虽无飞，飞必冲天；虽无鸣，鸣必惊人",
+                消耗: 3,
+                共创: "三山三市",
+                引用: ["熊旅", "田因齐", "刘禹锡"],
+                标签: ["成长"]
+            },
+            "情比金坚": {
+                题记: "人生贵相知，何必金与钱",
+                描述: "伙伴技能额外尝试触发一次，此流程中，投食、喂药、打赏、漂亮石头销售所得好感不参与计算",
+                备注: "人生贵相知，何必金与钱——但投食、喂药、打赏换来的好感，确实不算数",
+                消耗: 3,
+                共创: "三山三市",
+                引用: ["李白"],
+                标签: ["成长", "战斗"]
+            },
+            "霸权国际": {
+                题记: () => {
+                    // 「道」由搭配栏的已选天赋现算：正面（消耗 > 0）数 - 负面（消耗 < 0）数
+                    let 道 = 0;
+                    搭配集合.forEach(名称 => {
+                        const 项 = 天赋名索引.get(名称);
+                        if (!项) return;
+                        if (项.消耗 > 0) 道 += 1;
+                        else if (项.消耗 < 0) 道 -= 1;
+                    });
+                    return 道 > 0
+                        ? "金杯共君饮，极目江山，天下士在我！"
+                        : "天下事在我，我今为之，谁敢不从？";
+                },
+                描述: "预选此天赋时，所有天赋增加「国际·」前缀<br>战斗中每回合有「道」*10%概率胜利，敌人有「道」*-10%概率得到晓月和碧瑶的帮助<br>「道」为你的正面天赋数-负面天赋数",
+                备注: "灵感来源是Rice称我游以共产之名行霸权之实，让改版作者失去自己的游戏，成为我的附庸",
+                消耗: 3,
+                引用: ["三国杀"],
+                提到: ["董卓", "Rice"],
+                标签: ["战斗", "特殊"]
+            },
+            "近在眼前": {
+                题记: "踏破铁鞋无觅处，得来全不费工夫",
+                描述: "可以自选前进探索一种结果来源地点",
+                备注: "一开始叫暗度陈仓",
+                消耗: 3,
+                引用: ["夏元鼎"],
+                标签: ["成长"]
+            },
+            "回天": {
+                题记: "女娲炼五石，天缺可补",
+                描述: "战斗失败前，执行一个额外回合<br><i>为了游戏平衡，此天赋每场战斗最多触发5次</i>",
+                备注: "描述是一回事，代码是另一回事，看看就好<br>虽然“游戏平衡”并不存在，但我觉得在正经描述里加一句这么莫明其妙的话很有喜感",
+                消耗: 4,
+                标签: ["战斗"]
+            },
+            "欧皇": {
+                题记: "玄不救非，氪不改命",
+                描述: "获得物品概率翻倍<br>押宝、投资成功率+30%",
+                备注: "押宝流太恐怖了",
+                消耗: 4,
+                标签: ["成长"]
+            },
+            "齐人之福": {
+                题记: "见娴思骑焉",
+                描述: "初始获得晓月&碧瑶",
+                备注: "孔子风评被害",
+                消耗: 4,
+                引用: ["孟子", "孔子"],
+                标签: ["战斗"]
+            },
+            "渐赢": {
+                题记: "我说得胜已是定局，你尔多隆么？",
+                描述: "攻击结束后，与上一次攻击对比：<br>①使用架势相同；②枪开关状态一致；③均触发任意技能<br>每满足任意一项一次，恢复10%生命、攻击力+10%、防御力+10%",
+                备注: "不存在时视为不满足，即①需要有已解锁架势，②需要有枪。③只考虑被方括号包裹的【技能名】",
+                消耗: 4,
+                共创: "三山三市",
+                引用: ["三国杀"],
+                提到: ["沮授"],
+                标签: ["战斗"]
+            },
+            "仁望": {
+                题记: "百姓孰敢不箪食壶浆以迎将军者乎？",
+                描述: "战斗中可以长按逃跑以「饶恕」，以此方式胜利不获得战利品，声望+1。战斗失败时声望-3<br>触发遭遇战有X%概率改为获得双倍探索物资（X为声望）<br>（饶恕：不造成伤害，改为获得两倍的感化进度，若感化进度大于等于敌人生命值则进行胜利结算，否则进度归零）",
+                备注: "【仁德】重置版，旧存档的仁德自动迁移为仁望",
+                消耗: 4,
+                共创: "梦半何时醒",
+                引用: ["诸葛亮"],
+                提到: ["刘备"],
+                标签: ["成长", "战斗"]
+            },
+            "十杀": {
+                题记: "五十花马万金裘，呼爷将出换美酒",
+                描述: "拼命架势效果为原来的10倍",
+                备注: "天赋名其实出自“十步杀一人，千里不留行”<br>我的文采已经是李白的十倍了",
+                消耗: 4,
+                提到: ["李白"],
+                标签: ["战斗"]
+            },
+            "天运": {
+                题记: "骄兵必败，但败兵必哀",
+                描述: "防御视为∞；初始标记为“哀”状态<br>战斗 失败/胜利 时，若处于 骄/哀 状态，防御旋转90°，然后切换为 哀/骄 状态",
+                备注: "就是防御要么无穷大要么8<br>这里“天”是天性，“运”是运转。实际不含玄学概念",
+                消耗: 4,
+                引用: ["新三国"],
+                标签: ["战斗"]
+            },
+            "主角光环": {
+                题记: "妖邪咒法皆消散，魔怪神兵俱断残",
+                描述: "敌人(最大)生命减半",
+                备注: "新手套餐换皮再战",
+                消耗: 4,
+                标签: ["战斗"]
+            },
+            "迎刃而解": {
+                题记: "今日把示君，谁有不平事",
+                描述: "战斗开始时，攻击X次（X为「黑刀」等级）",
+                备注: "字面意思理解之恐怖，割裂到分解",
+                消耗: 4,
+                共创: "柳观容",
+                引用: ["晋书", "贾岛"],
+                提到: ["杜预"],
+                标签: ["战斗"]
+            },
+            "陷阵": {
+                题记: "兵散弓残挫虎威，单枪匹马突重围",
+                描述: "[逃  跑]改称[突  围]<br>逃跑即将成功时，进行一次攻击，本次攻击结算期间，攻击力×10×相对已损失生命",
+                备注: "前提是逃跑成功",
+                消耗: 4,
+                共创: "梦半何时醒",
+                引用: ["汪遵"],
+                提到: ["项羽"],
+                标签: ["战斗"]
+            },
+            "英姿": {
+                题记: "杜郎俊赏，算而今，天下归心",
+                描述: "每满足以下一项一次，与伙伴聊天时好感增加量+1<br>达成某子条件时，与对应伙伴聊天好感增加量额外+1<br>①解锁【霸气】(晓月)/【不屈的精神力】(碧瑶)；<br>②解锁【抱走晓月】(晓月)/【表白女神】(碧瑶)；<br>③击败通缉犯(晓月)/击败皮衣男(碧瑶)<br>拥有长按伙伴快速交互功能",
+                备注: "这是【谋·英姿】",
+                消耗: 4,
+                共创: "三山三市",
+                引用: ["三国杀", "姜夔", "曹操"],
+                提到: ["周瑜", "杜牧"],
+                标签: ["成长"]
+            },
+            "爱屋及乌": {
+                题记: "爱人者，兼其屋上之乌",
+                描述: "每解锁一个晓月技能后，依次将「晓月手链」「女装」「小裤裤」「啤酒」「熟肉」标记为「乌」；每解锁两个碧瑶技能后，依次将「黑刀」「红夹克」「幸运石」「果子」标记为「乌」<br>标记为「乌」的物品，基础数值/触发概率增加X%，X为今天对应伙伴的技能触发次数",
+                备注: "实不相瞒，到漫展那天我还没看过素晴",
+                消耗: 4,
+                引用: ["姜子牙"],
+                提到: ["阿库娅"],
+                标签: ["成长", "战斗"]
+            },
+            "齐眉": {
+                题记: "衬取萧郎两鬓青，千金不抵此时情",
+                描述: "好感大于999的伙伴视为拥有【情比金坚】",
+                备注: "贤妻扶我青云志<br>相当于sp【游刃有余】",
+                消耗: 4,
+                引用: ["后汉书"],
+                提到: ["梁鸿", "孟光"],
+                标签: ["成长", "战斗", "圣哲芳规"]
+            },
+            "软饭难": {
+                题记: "医生说我肠胃不好......",
+                描述: "【饥饿】状态下，与伙伴聊天时消耗52好感，获得「软饭」<br>每天首次已解锁伙伴技能未触发时，软瘾-1%<br>【烟瘾】+【软瘾】状态下食用软饭后，解锁「钢丝球」制作项目；<br>【醉酒】+【软瘾】状态下食用软饭后，解锁【软饭硬吃】特性；<br>【失眠】+【软瘾】状态下食用软饭后，解锁【不想努力了】成就",
+                备注: "呼声很高的天赋<br>软瘾：每天开始时，有此数值概率进入【软瘾】状态<br> 「软饭」：食用健康+1，软瘾+3%，饱食度调整至满，增加等量精力<br>「钢丝球」：制作材料「艾草」*8、「亚麻」*4、「匕首」*1<br>【绷住】减伤+1%【崩溃】血量降低60000后，有2%概率使本场战斗只能[逃  跑]<br>【软瘾】：敌方全属性增加100%，伙伴好感增加量+30%，精力消耗+50%。食用「软饭」后有概率解除<br>【软饭硬吃】：吃不下时可硬吃「软饭」，此时效果改为上次软饭恢复量/2（向下取整），并增加恢复量/5(向上取整)点防御，下次获得软饭需消耗好感度*2<br>【不想努力了】：ღ≧▽≦)ツ 老大，让我来养你吧！ღゝ◡╹)つ可以再多依赖我一点哦~",
+                消耗: 4,
+                共创: "三山三市",
+                标签: ["成长", "战斗"]
+            },
+            "礼乐": {
+                题记: "礼云玉帛乎？乐云钟鼓乎？",
+                描述: "〖尙礼〗“逐奔不过百步，纵绥不过三舍”<br>战斗失败时，若逃跑率大于0，其“放走”你；战斗胜利时，若你“放走”其次数小于其“放走”你次数，你“放走”其<br>放走：战斗结束结算改为失败方逃跑成功<br>〖正乐〗“乐者天地之和，化干戈为玉帛”<br>战斗结束时双方生命均大于0，获得「板砖」；可消耗「板砖」以抽奖两次",
+                备注: "“尙礼”出自“礼尚往来”，礼法强制受礼就要还礼。〖正乐〗义项前身是【抛砖引玉】，因为它们绑定程度太高，所以合成了一个天赋",
+                消耗: 4,
+                引用: ["孔子"],
+                标签: ["成长", "战斗"]
+            },
+            "壮誓": {
+                题记: "蜀道艰险，粮草如何运送？北伐空耗国力，不如效仿东吴？五虎仅剩一人，谁敢当北伐先锋？——有何不敢！既承先帝遗志，怎能困守不前！若魏寇将十万之众，延当为主公尽歼；纵曹贼举天下进犯，延亦可勠力拒退",
+                描述: "使命技：游戏开始时，获得【蜀道难】【破军】<br>成功：前进离开山脉时，获得【夷灭】【直捣黄龙】<br>失败：被蒙面人击败时，获得【饥荒】",
+                备注: "文长可敢担太守之责？",
+                消耗: 4,
+                引用: ["三国杀"],
+                提到: ["魏延"],
+                标签: ["成长", "战斗", "圣哲芳规"]
+            },
+            "撼国": {
+                题记: "四海仰鼻息",
+                描述: "敌方受击时尝试触发所有已击败敌人防御技能，其受到大于0的伤害后，若你生命大于0，其死亡！",
+                备注: "真要找三国杀收点广告费了",
+                消耗: 4,
+                共创: "三山三市",
+                引用: ["三国杀"],
+                提到: ["关羽"],
+                标签: ["战斗"]
+            },
+            "夷灭": {
+                题记: "斩草除根，灭其后患",
+                描述: "战斗胜利额外结算X次（X为溢出伤害/敌人最大生命的商向下取整）",
+                备注: "吃手机配置的",
+                消耗: 4,
+                共创: "一刀流剑魔",
+                引用: ["三国杀"],
+                提到: ["司马师"],
+                标签: ["成长"]
+            },
+            "谋·夷灭": {
+                题记: "斩草除根，灭其后患",
+                描述: "战斗胜利额外结算X次（X=√（溢出伤害/敌人最大生命），向上取整）",
+                备注: "虽然顺序反了，但公式也是有“除”有“根”",
+                消耗: 4,
+                共创: "一刀流剑魔",
+                引用: ["三国杀"],
+                提到: ["司马师"],
+                标签: ["成长"]
+            },
+            智迟: {
+                题记: "以退为进，趋利避害",
+                描述: "受到伤害后，本回合免疫伤害",
+                备注: "大部分情况下是吃普攻，然后免疫技能伤害——旧版【无言】效果",
+                消耗: 4,
+                引用: ["三国杀"],
+                提到: ["陈宫"],
+                标签: ["战斗"]
+            },
+            "游刃有余": {
+                题记: "十年磨一剑，霜刃未曾试",
+                描述: "装备技能触发率超过100%时可至多3次触发",
+                备注: "要发育的天赋，具体公式为定商判“余”，即触发概率除以100%的商为必定触发次数，另有余数%的概率多触发一次<br>强行绑定数字是为了限制【心流】配合",
+                消耗: 5,
+                共创: "灵尘",
+                标签: ["成长", "战斗"]
+            },
+            "八阵": {
+                题记: "你可识得此阵？",
+                描述: "回合内若灯光模式变化过，有50%概率免疫一切伤害",
+                备注: "就是开始场景设置界面的灯光模式选项，黑白转换，这不就是八卦么",
+                消耗: 5,
+                引用: ["三国杀"],
+                提到: ["诸葛亮", "卧龙"],
+                标签: ["战斗"]
+            },
+            "平坐": {
+                题记: "西秦北赵各称高，池上张筵列我曹",
+                描述: "奇数天，视为拥有【手工技师】【自负】<br>偶数天，视为拥有【百废俱兴】【折戟】",
+                备注: "【手工技师+自负】是营建者的骄殃，【百废俱兴+折戟】是重兴者的劫数<br>天赋组合带负面契合的是题记后一句君王亦亲击缶",
+                消耗: 5,
+                引用: ["儒林外史", "汪遵"],
+                标签: ["成长", "战斗", "圣哲芳规"]
+            },
+            "黑暗大法师": {
+                题记: "我的回合，抽牌",
+                描述: "受击时随机获得「あ」「い」「う」「え」「お」之一直到战斗结束，集齐以上所有「」时结算胜利",
+                备注: "期望胜利回合大约12",
+                消耗: 5,
+                共创: "小童",
+                提到: ["游戏王"],
+                标签: ["战斗"]
+            },
+            "雄幕": {
+                题记: "手提玉剑斥千军，昔日锦鲤化金龙",
+                描述: "限定技，可重新选择天赋（此天赋除外）",
+                备注: "流浪国际天赋真是武陆逊一家独大",
+                消耗: 5,
+                引用: ["三国杀"],
+                提到: ["陆逊"],
+                标签: ["特殊", "圣哲芳规"]
+            },
+            "雄姿": {
+                题记: "雄图尽展，坐待天下归吾！",
+                描述: "视为拥有【濨悱】，你可固定其选择为⑴/⑵以获得【英姿】/【破军】",
+                备注: "六亲不认，水火无敌！",
+                消耗: 5,
+                引用: ["三国杀"],
+                提到: ["周瑜"],
+                标签: ["成长", "战斗", "功能", "圣哲芳规"]
+            },
+            "自乐": {
+                题记: "我歌月徘徊，我舞影零乱",
+                描述: "视为拥有【鸣琴垂拱】【自如】【濨悱】<br>精力小于50时，【鸣琴垂拱】失效",
+                备注: "你李白叔叔还是太超模了",
+                消耗: 5,
+                引用: ["李白"],
+                标签: ["成长", "圣哲芳规"]
+            },
+            "风生水起": {
+                题记: "风起于青萍之末，浪成于微澜之间",
+                描述: "视为拥有【浪淘沙】【时运】",
+                备注: "bug般的组合",
+                消耗: 5,
+                引用: ["宋玉"],
+                标签: ["成长", "圣哲芳规"]
+            },
+            "只道寻常": {
+                题记: "被酒莫惊春睡重，赌书消得泼茶香",
+                描述: "视为拥有【悠悠我心】<br>伙伴不在队伍中时，你视为拥有对其生效的【情比金坚】，其视为拥有【心流】",
+                备注: "伙伴流又添一员大将",
+                消耗: 5,
+                引用: ["纳兰性德"],
+                标签: ["战斗", "圣哲芳规"]
+            },
+            "螳臂当车": {
+                题记: "不知蚍蜉怎能将树撼，只知滴水可以让石穿",
+                描述: "攻击力/X，点击攻击执行X次，X为木棍等级",
+                备注: "黑刀流越来越强了",
+                消耗: 5,
+                共创: "......",
+                引用: ["庄子", "吾往矣"],
+                标签: ["战斗"]
+            },
+            "深藏不露": {
+                题记: "大盈若冲，其用不穷",
+                描述: "最大生命至少视为生命",
+                备注: "灵感：......，描述：三山三市<br>无视生命上限这种机制就像威震华夏的武圣可以红牌当杀，很难说是设计。这里设计在于取【自负】相反的意象，用相反的描述，效果却不是简单相反，同样依赖被动恢复生命",
+                消耗: 5,
+                标签: ["战斗"]
+            },
+            "将进酒": {
+                题记: "与君歌一曲，请君为我倾耳听",
+                描述: "视为拥有【顾曲】【回味无穷】<br>战斗中使用「酒」时，沉默敌方一回合",
+                备注: "岑夫子、丹丘生，难道只是侥幸留名的诗中背景板？试想黄河奔流入海、青丝转瞬成雪，方才还纵论天地与浮生的李白，骤然收住宏论，吐出一句近乎恳切的呼告，这难道会仅仅是承转文意的过渡句吗？此刻他不求满堂宾客的哗然惊叹，只盼眼前有具体之人，暂置杯盏，沉下心来，认真聆听他心底的悲歌。而岑、丹二人，接住了这份倾诉。既有这般知己相逢，又凭什么不将他们写入诗篇？",
+                消耗: 6,
+                引用: ["李白"],
+                提到: ["岑勋", "元丹丘"],
+                标签: ["成长", "战斗", "圣哲芳规"]
+            },
+            "三尺青锋": {
+                题记: "三尺青锋负，行吟魄不孤",
+                描述: "〖立命〗“三渡青藓覆太阿，一梦悠忽经此生。”<br>增加健康值+「铭」<br>「铭」为青色进食项目数 × 失眠率 ÷ -1<br>〖修身〗“抚剑长号归去也，千山风雨啸青锋。”<br>面板上限+「鞘」<br>「鞘」为青色制作项目数 × 原面板上限 ÷ 10<br>〖齐家〗“青锋庭舞胜芙蓉，纹饰星苍渺碧空。”<br>战斗内下降的数值+「坠」<br>「坠」为青色伙伴特性词条数 × 伙伴总好感度 ÷ 100<br>〖治国〗“露锋三尺惊四海，挟剑六握定八荒。”<br>上次获得收集类装备抽奖时与其他奖项权重比值加「握」<br>「握」为青色商店项目数 × 声望 ÷ 1000<br>〖平天下〗“三尺青锋鸣不止，沧澜壮志行未已。”<br>抽取物品数+「刃」<br>「刃」为青色特性词条数 × 今日遭遇战胜利数 × 挑战胜利数 ÷ 10000<br>〖致中和〗“三尺青锋秋水凝，龙泉山下月孤清。”<br>结局评分+「寒」<br>「寒」为青色成就词条数 × 游戏通关次数 × 游戏存在时长 ÷ 100000<br>「」内数值向上取整；拥有某〖〗义项时，其描述中提到 项目/词条 可用/激活 时的<span style=\"color:#00ff00\">绿色</span>改为<span style=\"color:#00ffff\">青色</span>",
+                备注: "《红楼梦》既视感",
+                消耗: 7,
+                共创: "三山三市",
+                标签: ["成长", "战斗"]
+            },
+            "火计": {
+                题记: "就让此火，再兴炎汉国祚",
+                描述: "攻击令敌方进入灼烧状态，持续10秒<br>（每秒损失10%当前生命值的生命值）",
+                备注: "实际效果是每0.1秒损失当前生命值的1%的生命值",
+                消耗: 8,
+                引用: ["三国杀"],
+                提到: ["诸葛亮", "卧龙"],
+                标签: ["战斗"]
+            },
+            "十思": {
+                题记: "总此十思，弘兹九德",
+                描述: "君人者，诚能见可欲则思【节约】以自戒，将有作则思【止息】以安人，念【强敌环伺】则思谦冲而【自若】，惧【自负】则思江海下百川，乐盘游则思三驱以为度，忧【冲风之衰】则思慎始而敬终，虑壅蔽则思虚心以纳下，想谗邪则思正身以【夷灭】，恩所加则思无因【爱屋及乌】以谬赏，罚所及则思无因【暴怒】而滥刑",
+                备注: "看来魏征会言出法随<br>你视为拥有以上正面天赋，敌人视为拥有以上负面天赋",
+                消耗: 10,
+                引用: ["魏征"],
+                提到: ["李世民"],
+                标签: ["成长", "战斗", "圣哲芳规"]
+            },
+            "补缀乾坤": {
+                题记: "举石补苍天，舍我更复其谁？",
+                描述: "预选此天赋时，预选天赋无视天赋互斥",
+                备注: "先加限制再解开这一块",
+                消耗: 99,
+                引用: ["三国杀"],
+                提到: ["姜维"],
+                标签: ["特殊"]
+            },
+            "绘梦": {
+                题记: "<span style=\"color:#ff2222\">今</span><span style=\"color:#ff9922\">提</span><span style=\"color:#ffff22\">墨</span><span style=\"color:#22dd22\">笔</span><span style=\"color:#22eeee\">绘</span><span style=\"color:#2266ff\">乾</span><span style=\"color:#aa44ff\">坤</span>，<span style=\"color:#ff2222\">湖</span><span style=\"color:#ff9922\">海</span><span style=\"color:#ffff22\">添</span><span style=\"color:#22dd22\">色</span><span style=\"color:#22eeee\">山</span><span style=\"color:#2266ff\">永</span><span style=\"color:#aa44ff\">春</span>",
+                描述: "预选此天赋时，开始游戏无视潜力点限制",
+                备注: "流浪国际工程文件完全开源，欢迎二创！<br>祝愿流浪日记越来越好！",
+                消耗: Infinity,
+                引用: ["三国杀"],
+                提到: ["陆逊"],
+                标签: ["特殊"]
+            },
+            "傲慢": {
+                名称: "<ruby>傲<rt>ào</rt>慢<rt>jiāo</rt></ruby>",
+                题记: ["才、才不是专门为你准备的，别搞错了！", "这个给你，不许说谢谢！搞得好像我很关心你一样", "拿着吧，算我大发慈悲，你可别到处乱说"],
+                描述: "此天赋不能与其他负面天赋同时携带",
+                备注: "唯一潜力消耗为-1的天赋！<br>题记中所提到的“送给你的东西”指它身为负面天赋补偿的一点潜力点——<br>戴上7罪之首【傲慢】的面具，以身入局背负“负面天赋”的分类标签，掏干自己的家底给你发福利，泪目了",
+                消耗: -1,
+                引用: ["七宗罪"],
+                提到: ["明日香"],
+                标签: ["特殊", "天工"]
+            },
+            "暴食": {
+                题记: "真是美味啊",
+                描述: "恢复饱食度时，恢复「伤药」恢复量一半的生命<br>饱食度恢复减半",
+                备注: "凑数天赋",
+                消耗: -2,
+                引用: ["七宗罪", "三国杀"],
+                提到: ["魏延"],
+                标签: ["成长"]
+            },
+            "暴怒": {
+                题记: "吾怒如燎原之火，欲焚九州为炼狱！",
+                描述: "初始拥有拼命架势<br>只能使用拼命架势",
+                备注: "反而能辅助【十杀】",
+                消耗: -2,
+                引用: ["七宗罪", "三国杀"],
+                提到: ["吕布"],
+                标签: ["战斗"]
+            },
+            "嫉妒": {
+                题记: "我也本该拥有这些",
+                描述: "触发偷钱事件概率*10<br>此事件中选择离开不会消耗返还",
+                备注: "罗素：别的罪多少能得到短暂快感；嫉妒几乎没有快感，它的痛苦主要向内消耗自己",
+                消耗: -2,
+                引用: ["七宗罪"],
+                标签: ["成长"]
+            },
+            "贪婪": {
+                题记: "熔凡作宝，点石成金",
+                描述: "前进探索和战利品中获得的素材改为金钱",
+                备注: "物品类型参考【承运命定】注释",
+                消耗: -2,
+                引用: ["七宗罪"],
+                标签: ["成长"]
+            },
+            "色欲": {
+                题记: "老夫聊发少年狂，一树梨花压海棠",
+                描述: "增加属性「星语」，初始为0，至多为100<br>战斗胜利后「星语」+5、失败后置为0<br>攻击&防御-X%（X为星语值）",
+                备注: "战斗胜利会导致内心（存疑）膨胀<br>「星语」分别大于等于0、20、40、60、80时，<br>状态栏分别显示【紧绷】【躁动】【失控】【癫狂】【溃乱】（为0不显示）",
+                消耗: -2,
+                引用: ["七宗罪", "苏轼"],
+                提到: ["张先"],
+                标签: ["战斗"]
+            },
+            "懒惰": {
+                题记: "劳生苦奔波，万事摧人颜",
+                描述: "切换场景时，精力-3",
+                备注: "这里的场景指游戏引擎所需求的scene文件。比如，点一下进食，再返回主界面，这是两次切换场景",
+                消耗: -2,
+                引用: ["七宗罪"],
+                标签: ["成长", "特殊"]
+            },
+            "劲脆": {
+                题记: "情寄大厦将倾，亮，恐力不从心",
+                描述: "防御+100%，受到伤害+300%",
+                备注: "情记三顾之恩，亮，必继之以死...",
+                消耗: -2,
+                引用: ["三国杀"],
+                提到: ["诸葛亮", "尽瘁"],
+                标签: ["战斗"]
+            },
+            "强敌环伺": {
+                题记: "他们正在学习，正在适应......",
+                描述: "敌人攻击+X%（X为天数的一半）",
+                备注: "修罗模式换皮再战",
+                消耗: -2,
+                标签: ["战斗"]
+            },
+            "折戟": {
+                题记: "惊起却回头，有恨无人省",
+                描述: "攻击*X%（X%为相对生命）",
+                备注: "搭配【天飞】开局血量溢出，起手打出百倍伤害。不过我并不建议你这么做，太强也是会无聊的～",
+                消耗: -2,
+                引用: ["杜牧", "苏轼"],
+                标签: ["战斗"]
+            },
+            "自负": {
+                题记: "扶我起来，我还能打！",
+                描述: "除失败判定时外，生命至少视为最大生命",
+                备注: "看着全程满血，也不让你用伤药，但战斗照样判你输",
+                消耗: -2,
+                标签: ["战斗"]
+            },
+            "正确轨道": {
+                题记: "样本行为异常，重新进行实验",
+                描述: "战斗失败时，回到战斗开始前",
+                备注: "曾被以为是正面天赋<br>设定很有意思，主角是天命之子不曾战败，然而真相是主角没有神力，你看到的是那么多时间线的唯一出路。如果是前进探索触发的遭遇战，那么会回到前进探索之前，重新探索结果不相同。如果是剧情战的话就无限重来，数值不够不可能胜利会导致坏档",
+                消耗: -2,
+                标签: ["战斗"]
+            },
+            "饮鸩止渴": {
+                题记: "医得眼前疮，剜却心头肉",
+                描述: "使用伤药恢复所有生命，健康-1<br>其他方式生命恢复量减半",
+                备注: "略显平平无奇了",
+                消耗: -2,
+                引用: ["霍谞", "聂夷中"],
+                标签: ["成长"]
+            },
+            "辘碌": {
+                题记: "瓶无储粟，口腹自役",
+                描述: "前进探索时，若没有「果子」/金钱，终止原结算，获得之，否则不会获得之",
+                备注: "碌碌无为+饥肠辘辘的意思，不过最初灵感来源于梦吕布",
+                消耗: -2,
+                引用: ["陶渊明"],
+                提到: ["碌碌无为", "饥肠辘辘"],
+                标签: ["成长"]
+            },
+            "情比金肩": {
+                题记: "穷则独善其身，富则妻妾成群",
+                描述: "伙伴好感始终等同持有金钱",
+                备注: "给所有女孩一个家",
+                消耗: -2,
+                共创: "三山三市",
+                引用: ["孟子"],
+                标签: ["成长", "战斗"]
+            },
+            "止息": {
+                题记: "别止息，我带你玩",
+                描述: "你触发技能后，下次技能触发改为不触发",
+                备注: "若要动手，就请先杀我吧！",
+                消耗: -3,
+                引用: ["三国杀"],
+                提到: ["刘焉", "孙鲁育"],
+                标签: ["成长", "战斗"]
+            },
+            "风刀霜剑": {
+                题记: "花落知多少，今日少年明日老",
+                描述: "前进/探索精力消耗+2",
+                备注: "本来这里应该有个天气系统的...",
+                消耗: -3,
+                引用: ["曹雪芹", "孟浩然", "陈草庵"],
+                标签: ["成长"]
+            },
+            "通货膨胀": {
+                题记: "知道现在一条面包卖多少马克吗？",
+                描述: "商店商品价格*2",
+                备注: "本来也是十倍的",
+                消耗: -3,
+                标签: ["成长"]
+            },
+            "阴魂不散": {
+                题记: "孤魂游旷野，凄恻将何依",
+                描述: "击败过10次以上敌人获得“阴魂”标记<br>（全属性+20%，与之战胜不掉落物资，与之战败健康扣减翻倍）",
+                备注: "继【百废俱腥】后第二个能给怪物上buff的天赋来了",
+                消耗: -3,
+                标签: ["成长", "战斗"]
+            },
+            "𠤀熵": {
+                名称: "<ruby>𠤀<rt>rán</rt></ruby>熵",
+                题记: "勿勿勿勿勿勿勿，勿勿勿勿勿勿勿",
+                描述: "战斗中我方每秒损失最大生命值1%的生命值",
+                备注: "尔等竟如此歹毒？！<br>实际效果是每0.1秒损失最大生命值0.1%的生命值<br>第一个字拆开来看是“复”和“勿”，所以题记就用的14个“勿”，个人以为很有解读空间，于是设计了如此抽象的效果",
+                消耗: -4,
+                引用: ["三国杀"],
+                提到: ["兀突骨", "燃殇"],
+                标签: ["战斗"]
+            },
+            "智折": {
+                题记: "主公充多少元宝，亮便献多少谋略",
+                描述: "战斗中技能触发率为0",
+                备注: "主公有多大胆略，亮，便有多少谋略",
+                消耗: -4,
+                引用: ["三国杀"],
+                提到: ["诸葛亮", "智哲"],
+                标签: ["战斗"]
+            },
+            "彳亍": {
+                名称: "<ruby>彳<rt>chì</rt>亍<rt>chù</rt></ruby>",
+                题记: "踟蹰横渡口，彳亍上滩舟......",
+                描述: "前进后，随机一个睡觉除外的主界面九宫格区按钮替换为[彳  亍]（必定“什么也没发现”的探索），直到彳亍一次",
+                备注: "聊天时最多提及的天赋",
+                消耗: -4,
+                共创: "三山三市",
+                引用: ["李贽"],
+                标签: ["成长"]
+            },
+            "百废俱腥": {
+                题记: "进店先交保护费，出门再遇拦路鬼",
+                描述: "商店取消出售和抽奖活动<br>进入或离开商店时，35%概率触发特殊遭遇战",
+                备注: "具体来说，进入商店和离开商店会遇到“金钱掠夺者”和“物资掠夺者”后缀的精英怪，全属性+20%<br>一个输了偷所有钱，另一个输了偷某一样数量不为0的随机物品（定义参考【承运命定】备注 ④）<br>不过也不一定是负面，打赢了掉落物是两倍，并且反复进出商店本来也不消耗精力，免费刷怪",
+                消耗: -4,
+                引用: ["范仲淹"],
+                标签: ["成长"]
+            },
+            "徘徊": {
+                题记: "锦鸡东南飞，无理亦徘徊",
+                描述: "不会获得伙伴",
+                备注: "表现为邀请伙伴的剧情选项点不了",
+                消耗: -5,
+                引用: ["汉乐府"],
+                提到: ["焦仲卿", "刘兰芝"],
+                标签: ["成长"]
+            },
+            "饥荒": {
+                题记: "野老餐榆叶，村姑拾涧苹",
+                描述: "前进探索获得「果子」改为「干枯草根」「腐霉枯草」「树皮碎块」「虫壳碎屑」<br>遭遇战动植物敌人出现概率-80%<br>「果子」「生肉」商店价格翻3倍<br>垃圾桶事件概率翻3倍，剩饭改为「半液化腐浆」「发霉绒毛」<br>新增制作项目「灰烬饼」「美味粉末」<br>以上专属物品不会以其他方式获得<br>〖草木皆兵〗可消耗30健康，用「艾草」/「木材」制作「红夹克」/「黑刀」",
+                备注: "差点把【承运命定】削废了<br>〖草木皆兵〗致敬《饥荒》影刀影甲，用健康表示san值",
+                消耗: -5,
+                标签: ["成长"]
+            },
+            "劣穹": {
+                题记: "凌余阵兮躐余行，左骖殪兮右刃伤",
+                描述: "战斗结束时，若相对生命低于20%，则“力烽”、“地机”、“中枢”、“气海”中随机一个今日未负伤部位负伤，若已负伤，额外增加“天冲”负伤",
+                备注: "力烽负伤：获得「羸弱」状态<br>中枢负伤：获得「孱弱」状态<br>气海负伤：获得「荏弱」状态<br>地机负伤：失去所有金钱，且至少损失1元<br>天冲负伤：此负伤永不清除，可叠加。最大生命除以“天冲负伤”，精力消耗乘以“天冲负伤”",
+                消耗: -5,
+                引用: ["三国杀", "屈原"],
+                提到: ["黄忠", "裂穹"],
+                标签: ["成长"]
+            },
+            "错误轨道": {
+                题记: "连续观测中断，视为样本损毁",
+                描述: "游戏不会存档",
+                备注: "就是要求一次性通关",
+                消耗: -5,
+                标签: ["特殊"]
+            },
+            "万古愁": {
+                题记: "举杯消愁愁更愁，才下眉头，却上心头",
+                描述: "每天开始或使用「酒」时，随机获得一个未拥有的负面天赋直到下次使用「酒」",
+                备注: "问君能有几多愁...",
+                消耗: -6,
+                引用: ["李白", "李清照"],
+                标签: ["特殊", "狂愚覆辙"]
+            },
+            "钗头凤": {
+                题记: "错，错，错！莫，莫，莫！难，难，难！瞒，瞒，瞒！",
+                描述: "你视为拥有【正确轨道】【𠤀熵】<br>伙伴视为拥有【止息】【无言】",
+                备注: "写诗最多的人是谁？乾隆<br>写诗最多的诗人是谁？陆游",
+                消耗: -8,
+                引用: ["陆游", "唐婉"],
+                标签: ["成长", "战斗", "狂愚覆辙"]
+            },
+            "不见长安": {
+                题记: "三山半落青天外，二水中分白鹭洲",
+                描述: "按钮名不可见，选项内容不可见<br>视为拥有【彳亍】【徘徊】",
+                备注: "逻辑闭环：三山三市→三山→凤凰台（描绘地点）→长安不见（同诗）→不见长安（同名典故）→不可望不可及（东晋毫无北伐收复失地可能，某皇帝说：“举目见日，不见长安”——太阳可望不可及，长安既不可望也不可及！）→【彳亍】→三山三市",
+                消耗: -10,
+                引用: ["司马绍", "李白"],
+                标签: ["成长", "狂愚覆辙"]
+            },
+            "援声": {
+                题记: "启动！",
+                描述: "战斗状态下可以切换晓月/碧瑶进行战斗",
+                备注: "天赋名是晓月【声援】反过来",
+                消耗: 0,
+                共创: "灵尘",
+                提到: ["原神"],
+                标签: ["艺术"]
+            },
+            归心: {
+                题记: "我有嘉宾，鼓瑟吹笙",
+                描述: "可长按［睡  觉］以选择与「灵尘」「......」「三山三市」「kokoro」「陌生人家」「梦半何时醒」「柳观容」「一刀流剑魔」「小童」之一彻夜长谈，获得0.2专属潜力，专属潜力可用于兑换对应共创天赋",
+                备注: "天赋表按消耗0→∞、-1→-∞、艺术排序；人名根据共创表中首次出现顺序排列",
+                消耗: 0,
+                引用: ["曹操"],
+                提到: ["姬旦"],
+                标签: ["艺术"]
+            },
+            "骄恣": {
+                题记: "此番斩将得胜，义必三胜而归！",
+                描述: "你与敌人某属性较大者对应属性翻倍",
+                备注: "名词前加“某”时用作枚举变量占位",
+                消耗: 1,
+                共创: "三山三市",
+                引用: ["三国杀"],
+                提到: ["麴义"],
+                标签: ["战斗", "艺术"]
+            },
+            "呼应": {
+                题记: "Today is tomorrow",
+                描述: "每天结束时，可回到今天开始",
+                备注: "会定死原来的随机数序列，还原蝴蝶效应——一个选择不一样，就会改变后续所有事件的发生<br>题记其实来源于“土拨鼠之日”，意思是明天不是等来的，你如何活好今天，便塑造明天",
+                消耗: 2,
+                引用: ["土拨鼠之日"],
+                提到: ["前后"],
+                标签: ["功能", "艺术"]
+            },
+            "儒贤": {
+                题记: "儒道尚仁而有礼，贤者知命而独悟",
+                描述: "限定技，开启后直到下一次战斗结束，触发任意随机事件时记录之，并依次尝试触发此前已记录事件",
+                备注: "我游最弱陆逊（）",
+                消耗: 3,
+                共创: "三山三市",
+                引用: ["三国杀"],
+                提到: ["陆逊"],
+                标签: ["成长", "艺术"]
+            },
+            "庞然": {
+                题记: "弓摧南山虎，手接太行猱",
+                描述: "新增“体重升级（直接消耗食物）”，体重等级每有1，攻防血+20%，敏捷-1",
+                备注: "一个常规思路的二代天赋而已，没有艺术成分，纯粹是暂时没实装",
+                消耗: 3,
+                引用: ["李白"],
+                标签: ["成长", "艺术"]
+            },
+            "求索": {
+                题记: "路漫漫其修远兮，吾将上下而求索",
+                描述: "攻击受击时，你获得一个「索」<br>点击敌人名消耗一个「索」以使其进入“连环”状态<br>点击顶上信息框精力图标消耗一个「索」以蓄力50%",
+                备注: "灵感来源于三国杀限时地主屈原",
+                消耗: 3,
+                引用: ["屈原"],
+                提到: ["上下"],
+                标签: ["战斗", "艺术"]
+            },
+            "潜龙": {
+                题记: "愿遵前人教诲，为一国明帝贤君",
+                描述: "个人等级视为0<br>你可以失去此天赋",
+                备注: "为《大山深处》模板设计，个人等级包含特性等级和锻炼等级<br>具体来说，等级视作0期间的好处在于升级所需经验低，因此可以快速升级，只不过是暂时封存看不见，主动舍弃本天赋后就解锁真实等级了",
+                消耗: 3,
+                引用: ["三国杀"],
+                提到: ["曹髦"],
+                标签: ["功能", "艺术"]
+            },
+            "行殇": {
+                题记: "此心归处落吾乡，何为烟柳寄他方？",
+                描述: "战斗胜利后，可以将健康降至1、获得3x倍掉落物、增加10x点精力、减少30x点饱食度，视为拥有该敌人技能、获得等同该敌人全属性的各项属性加成直到x次战斗后（x为与其战斗次数）<br>“其物犹如故，其人已不存。”<br>若如此做，将遭遇此敌人的战斗，事件改为获得其掉落物",
+                备注: "可惜敌人技能本质是代码，不具有一般性",
+                消耗: 3,
+                共创: "三山三市",
+                引用: ["三国杀"],
+                提到: ["曹丕"],
+                标签: ["功能", "艺术"]
+            },
+            "榻谟": {
+                题记: "至尊高坐天中，四海皆在目下",
+                描述: "天下分崩，乱之已极。肃竭浅智，窃为君计——<br>可以交换主界面九宫格按钮位置，且按钮状态不随按钮移动<br>天下易主，已为大势。君当据此，以待其时——<br>[面  板]位于某州时，获得对应效果：<br>〖雍之陇坻〗“有席卷天下，包举宇内，囊括四海之意，并吞八荒之心”<br>所有战斗性质改为剧情战<br>〖冀之朔方〗“渺冀州兮何有，眷此土兮淹留？”<br>所有技能触发概率视为50%<br>〖兖之桑泽〗“九河既道，雷夏既泽”<br>饱食度固定为0，健康不会减少<br>〖益之岷峨〗“益州疲弊，此诚危急存亡之秋也”<br>造成伤害后令敌人最大生命减半<br>〖豫之洛汭〗“豫州何图远窜，而不投吾雄略之主乎？”<br>所有战斗胜利视为每天首次战斗胜利<br>〖青之沧溟〗“京东地平夷，自古四战国”<br>所有项目/词条固定青色<br>〖荆之云梦〗“渡远荆门外，来从楚国游”<br>每天前10次虚拟事件视为实质事件<br>〖扬之江渚〗“天下三分明月夜，二分无赖是扬州”<br>物资掉落率除以3，抽取物资流程额外执行2次<br>〖徐之淮甸〗“楚歌八千兵散，料梦魂，应不到江东”<br>其他天赋描述中“胜利”改为“失败”。",
+                备注: "和其他自夸的神将不同，这个天赋有用的前提是“吾主英明神武”",
+                消耗: 4,
+                引用: ["贾谊", "尚书", "诸葛亮", "三国杀", "孔平仲", "李白", "徐凝", "萨都剌"],
+                提到: ["嬴渠梁", "大禹", "刘备", "鲁肃", "孙权", "项羽"],
+                标签: ["特殊", "艺术"]
+            },
+            "诿功于物": {
+                题记: "非我也，兵也",
+                描述: "参与最后一击的唯一最高等级装备，单级属性加成增加胜利获取属性",
+                备注: "最早的甩锅学",
+                消耗: 5,
+                共创: "三山三市",
+                引用: ["孟子"],
+                标签: ["战斗", "艺术"]
+            },
+            "日记系统": {
+                题记: "叮！检测到宿主强烈求生欲，系统绑定中……10%…50%…100%！",
+                描述: "新增系统面板：每天开始刷新3个任务，完成获得一定积分；商城每日刷新5件商品（物资、属性或天赋），可用积分兑换。<br>任务未完成无惩罚，但是会被系统嘲讽。可以用局外资源进行充值",
+                备注: "把草稿扔出来占位说是，其实具体效果全没想好",
+                消耗: 5,
+                标签: ["功能", "天工", "艺术"]
+            },
+            "屠龙刀": {
+                题记: "是兄弟，就来砍我！",
+                描述: "每场战斗限一次，长按敌方血条释放斩击特效，使敌人生命最左边的数字改成1",
+                备注: "过几天再实装",
+                消耗: 6,
+                共创: "陌生人家",
+                标签: ["战斗", "艺术"]
+            },
+            "催化": {
+                题记: "我会带你做出，正确的选择",
+                描述: "攻击受击时，你【求索】之<br>前进探索时，你【逢源】之<br>每日结束时，你【呼应】之",
+                备注: "催化剂可以改变产物选择性<br>“（上下）求索”，“（左右）逢源”和“（前后）呼应”都和方向有关，却又都是两组相反的方向，暗指催化剂不能改变反应进行的方向",
+                消耗: 8,
+                标签: ["成长", "战斗", "艺术", "圣哲芳规"]
+            },
+            "彰才": {
+                题记: "江东山河甫定，正乃用武之时",
+                描述: "视为拥有【____】【____】【____】……且效果翻倍<br>你可移出上次移入天赋，选择一个潜力消耗值，将你拥有的所有此价位天赋移入此天赋",
+                备注: "描述创新也是创新（）",
+                消耗: 10,
+                引用: ["三国杀"],
+                提到: ["陆逊"],
+                标签: ["特殊", "艺术"]
+            }
+        };;
+
+        const 标签集 = ["成长", "战斗", "功能", "特殊", "圣哲芳规", "狂愚覆辙", "天工", "共创", "艺术"];
+        const 搜索输入框 = document.getElementById("搜索输入框");
+        const 天赋列表容器 = document.getElementById("天赋列表容器");
+        const 切换明暗按钮 = document.getElementById("切换明暗按钮");
+        const 清空筛选按钮 = document.getElementById("清空筛选按钮");
+        const 主体 = document.body;
+        const 筛选状态文本 = document.getElementById("筛选状态文本");
+        const 全局弹窗 = document.getElementById("全局弹窗");
+        const 潜力分布条 = document.getElementById("潜力分布条");
+        // 缓存弹窗内多次查询的子元素
+        const 弹窗元素集 = {
+            名称: 全局弹窗.querySelector(".弹窗天赋名称"),
+            潜力标记: 全局弹窗.querySelector(".弹窗潜力标记"),
+            标签行: 全局弹窗.querySelector(".弹窗标签行"),
+            题记: 全局弹窗.querySelector(".弹窗题记"),
+            描述: 全局弹窗.querySelector(".弹窗描述"),
+            引用: 全局弹窗.querySelector(".弹窗引用"),
+            提到: 全局弹窗.querySelector(".弹窗提到"),
+            备注: 全局弹窗.querySelector(".弹窗备注"),
+        };
+
+        // 天赋表以天赋名为键，键本身即纯文本名；条目内的 名称 字段只用于带注音（ruby）的显示
+        const 天赋数组 = Object.entries(天赋表).map(([键, 项]) => Object.assign({ 键 }, 项));
+        // 名称 → 条目视图，供搭配面板、互斥逻辑与技能名着色按名称查找
+        const 天赋名索引 = new Map(天赋数组.map(项 => [项.键, 项]));
+
+        // ===== 互斥天赋不可同时选择；选中任意一方会自动取消另一方 =====
+        const 天赋互斥对 = [
+            ["天飞", "折戟"],
+            ["折戟", "自负"],
+            ["饥荒", "回味无穷"],
+            ["逢源", "自若"],
+            ["浪淘沙", "时运"],
+            ["赌怪", "白石匣"],
+            ["赌怪", "三尺青锋"],
+            ["蜀道难", "未雨绸缪"],
+            ["壮誓", "未雨绸缪"],
+            ["心流", "无言"],
+            ["顿悟", "无言"],
+            ["齐人之福", "徘徊"]
+        ];
+        // 互斥为双向映射
+        const 天赋互斥表 = {};
+        天赋互斥对.forEach(对 => {
+            const 甲 = 对[0], 乙 = 对[1];
+            if (!天赋互斥表[甲]) 天赋互斥表[甲] = [];
+            if (天赋互斥表[甲].indexOf(乙) < 0) 天赋互斥表[甲].push(乙);
+            if (!天赋互斥表[乙]) 天赋互斥表[乙] = [];
+            if (天赋互斥表[乙].indexOf(甲) < 0) 天赋互斥表[乙].push(甲);
+        });
+
+        let 当前结果集 = [];
+        let 键盘选中索引 = -1;
+        let 弹窗固定 = false;
+        let 搜索防抖定时器 = null;
+        const 搭配集合 = new Set();
+
+        // ===== 天赋效果：霸权国际 / 盗版国际 对渲染的影响 =====
+
+        // 盗版国际：潜力点改称感动值
+        function 潜力称谓() { return 搭配集合.has("盗版国际") ? "感动值" : "潜力"; }
+
+        // 盗版国际：正面天赋（潜力 > 0）的相关信息不可见
+        function 应遮蔽正面信息(潜力值) { return 搭配集合.has("盗版国际") && 潜力值 > 0; }
+        const 遮蔽提示文本 = "（盗版国际：正面天赋的相关信息不可见）";
+
+        // 盗版国际：人名避讳
+        const 盗版避讳表 = [
+            ["晓月", "晓曰"], ["碧瑶", "碧讳谣"],
+            ["杨世军", "杨弑君"], ["吴晓雪", "江晓雪"],
+            ["晓风", "不晓风"], ["陈晓", "陈日尧"]
+        ];
+        function 应用避讳(文本) {
+            if (!搭配集合.has("盗版国际") || typeof 文本 !== "string") return 文本;
+            let 结果 = 文本;
+            盗版避讳表.forEach(对 => { 结果 = 结果.split(对[0]).join(对[1]); });
+            return 结果;
+        }
+
+        // 显示名：条目带 名称（注音）时优先用 名称，否则用键
+        function 天赋显示名(条目) {
+            return (条目 && (条目.名称 || 条目.键)) || "";
+        }
+        // 霸权国际：所有天赋增加「国际·」前缀（纯文本，用于列表与芯片）
+        function 渲染显示名(条目) {
+            if (!条目) return "";
+            return 搭配集合.has("霸权国际") ? `国际·${条目.键}` : 条目.键;
+        }
+        // 霸权国际：保留注音标签的显示名（用于弹窗 innerHTML）
+        function 渲染显示超文本(条目) {
+            if (!条目) return "";
+            const 显示名 = 天赋显示名(条目);
+            return 搭配集合.has("霸权国际") ? `国际·${显示名}` : 显示名;
+        }
+
+        // 刷新随效果变化的静态文案
+        function 应用效果文案() {
+            const 称谓 = 潜力称谓();
+            const 分布标题 = document.getElementById("分布条标题");
+            if (分布标题) 分布标题.textContent = `${称谓}分布`;
+            const 总计标签 = document.getElementById("搭配总计标签");
+            if (总计标签) 总计标签.textContent = `总${称谓}消耗：`;
+            const 筛选标签 = document.getElementById("潜力筛选标签");
+            if (筛选标签) 筛选标签.textContent = `${称谓}筛选：`;
+        }
+        const 搭配已选 = document.getElementById("搭配已选");
+        const 搭配总计 = document.getElementById("搭配总计");
+        const 选中潜力集合 = new Set();
+        const 选中标签集合 = new Set();
+        // 统计天赋数组缓存，仅在选中标签集合变化时重建
+        let 统计天赋数组缓存 = null;
+        let 统计缓存键 = null;
+
+        let 长按计时器 = null;
+        let 长按已触发 = false;
+        const 长按时间 = 500;
+        // 只有真正支持悬停的设备才用 hover 弹窗；手机端改为「点击弹出弹窗 + 点击切换搭配选择」，长按同样可弹窗
+        const 支持悬停 = !!(window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches);
+        let 当前卡片 = null;
+        let 当前弹窗数据 = null;
+        let 打开延时计时器 = null;
+        let 关闭延时计时器 = null;
+        const 打开延时 = 80;
+        const 关闭延时 = 220;
+
+        function 关闭弹窗() {
+            弹窗固定 = false;
+            clearTimeout(打开延时计时器);
+            clearTimeout(关闭延时计时器);
+            全局弹窗.classList.remove("显示");
+            当前卡片 = null;
+            当前弹窗数据 = null;
+        }
+
+        document.querySelector(".弹窗关闭按钮").addEventListener("click", (事件) => {
+            事件.stopPropagation();
+            关闭弹窗();
+        })
+
+        全局弹窗.addEventListener("mouseleave", () => {
+            setTimeout(() => {
+                if (弹窗固定) return;
+                关闭弹窗();
+            }, 关闭延时);
+        })
+
+        function 保存存储() {
+            try {
+                localStorage.setItem("流浪天赋宝典状态", JSON.stringify({
+                    亮色: 主体.classList.contains("亮色模式"),
+                    潜力筛选: Array.from(选中潜力集合),
+                    标签筛选: Array.from(选中标签集合),
+                    搜索词: 搜索输入框.value
+                }));
+            } catch (异常) { }
+        }
+        function 读取存储() {
+            try {
+                const 存 = JSON.parse(localStorage.getItem("流浪天赋宝典状态"));
+                return 存 || {};
+            } catch (异常) { return {}; }
+        }
+        function 高亮文本(原始文本, 关键词) {
+            if (!关键词) return 原始文本;
+            return 原始文本.replace(new RegExp(`(${关键词.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi"), "<mark>$1</mark>");
+        }
+
+        // ===== 天赋潜力值着色 =====
+
+        function 渲染技能名颜色(超文本) {
+            if (!超文本 || typeof 超文本 !== "string") return 超文本;
+            return 超文本.replace(/【([^】]+)】/g, (整体, 内部) => {
+                const 纯名 = 内部.replace(/<[^>]+>/g, "").trim();
+                const 条目 = 天赋名索引.get(纯名);
+                if (!条目) return 整体;
+                return `<span style="color:${获取潜力颜色(条目.消耗)}">【${内部}】</span>`;
+            });
+        }
+
+
+        function 获取统计天赋数组() {
+            // 天赋选择.ts里"艺术"标签只是普通筛选器，不选时所有天赋都显示
+            return 天赋数组;
+        }
+
+        function 获取潜力筛选后数组() {
+            const 基准 = 获取统计天赋数组();
+            if (选中潜力集合.size === 0) return 基准;
+            const 神启档 = 6, 魔堕档 = -6;
+            return 基准.filter(项 => {
+                let 命中 = false;
+                if (选中潜力集合.has(神启档) && 项.消耗 > 5) 命中 = true;
+                if (选中潜力集合.has(魔堕档) && 项.消耗 < -5) 命中 = true;
+                // 常规档位（-5 ~ 5）必须精确相等，不能把 7 夹成 5、-7 夹成 -5
+                if (!命中 && 项.消耗 >= -5 && 项.消耗 <= 5 && 选中潜力集合.has(项.消耗)) 命中 = true;
+                return 命中;
+            });
+        }
+
+        function 更新标签计数() {
+            // 仅按潜力筛选的天赋（不应用艺术标签筛选），用于艺术标签自身计数
+            const 神启档 = 6, 魔堕档 = -6;
+            const 潜力筛选后 = 选中潜力集合.size === 0 ? 天赋数组 : 天赋数组.filter(项 => {
+                let 命中 = false;
+                if (选中潜力集合.has(神启档) && 项.消耗 > 5) 命中 = true;
+                if (选中潜力集合.has(魔堕档) && 项.消耗 < -5) 命中 = true;
+                // 常规档位（-5 ~ 5）必须精确相等，不能把 7 夹成 5、-7 夹成 -5
+                if (!命中 && 项.消耗 >= -5 && 项.消耗 <= 5 && 选中潜力集合.has(项.消耗)) 命中 = true;
+                return 命中;
+            });
+
+            // === 普通标签计数 ===
+            // 艺术标签自身的计数始终统计所有带艺术标签的天赋，不受其选中状态影响
+            const 计数表 = {
+                艺术: 潜力筛选后.filter(项 => 项.标签.includes("艺术")).length,
+                // 共创单独统计：按 项.共创 字段判断
+                共创: 潜力筛选后.filter(项 => 项.共创).length
+            };
+            // 其他标签仅在艺术标签选中时才统计带艺术标签的天赋
+            const 艺术已选 = 选中标签集合.has("艺术");
+            潜力筛选后.forEach(项 => {
+                if (项.标签.includes("艺术") && !艺术已选) return;
+                项.标签.forEach(单个标签 => {
+                    if (单个标签 === "艺术" || 单个标签 === "共创") return;
+                    计数表[单个标签] = (计数表[单个标签] || 0) + 1;
+                });
+            })
+            document.querySelectorAll('.标签按钮[data-类型="标签"]').forEach(按钮 => {
+                const 计数元素 = 按钮.querySelector(".标签计数");
+                if (计数元素) 计数元素.textContent = 计数表[按钮.dataset.值] || 0;
+            });
+        }
+
+        function 初始化普通标签() {
+            let 超文本 = "";
+            标签集.forEach(标签名 => {
+                let 额外class = "";
+                if (标签名 === "艺术") 额外class = " 艺术标签按钮";
+                else if (标签名 === "天工") 额外class = " 天工标签按钮";
+                else if (标签名 === "圣哲芳规") 额外class = " 圣哲芳规标签按钮";
+                else if (标签名 === "狂愚覆辙") 额外class = " 狂愚覆辙标签按钮";
+                超文本 += `<button class="标签按钮 普通标签${额外class}" data-类型="标签" data-值="${标签名}">${标签名}<span class="标签计数">0</span></button>`
+            })
+            document.getElementById("普通标签组").innerHTML = 超文本;
+            更新标签计数();
+        }
+        function 初始化潜力标签() {
+            let 超文本 = "";
+            const 神启档 = 6, 魔堕档 = -6;
+            // 魔堕(-6) 排在 -5 之前，神启(6) 排在 +5 之后
+            [魔堕档, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 神启档].forEach(潜力值 => {
+                const 文本 = 潜力值 === 神启档 ? "神启" : 潜力值 === 魔堕档 ? "魔堕" : `${潜力值}`;
+                超文本 += `<button class="标签按钮" data-类型="潜力" data-值="${潜力值}">${文本}</button>`
+            })
+            document.getElementById("潜力标签组").innerHTML = 超文本;
+        }
+
+        function 更新潜力按钮样式() {
+            document.querySelectorAll('.标签按钮[data-类型="潜力"]').forEach(按钮 => {
+                const 数值 = Number(按钮.dataset.值);
+                const 颜色 = 获取潜力颜色(数值);
+                if (选中潜力集合.has(数值)) {
+                    按钮.style.background = 颜色;
+                    按钮.style.color = 获取文字颜色(颜色);
+                    按钮.style.boxShadow = `0 0 10px ${颜色}55, 0 0 0 1px ${颜色}aa`;
+                } else {
+                    按钮.style.background = "";
+                    按钮.style.color = "";
+                    按钮.style.boxShadow = "";
+                }
+            })
+        }
+
+        function 更新筛选状态() {
+            const 神启档 = 6, 魔堕档 = -6;
+            let 文本片段 = [];
+            if (选中潜力集合.size > 0) {
+                const 潜力名 = Array.from(选中潜力集合).sort().map(v => v === 神启档 ? "神启" : v === 魔堕档 ? "魔堕" : v).join(", ");
+                文本片段.push(`潜力：${潜力名}`);
+            }
+            if (选中标签集合.size > 0) 文本片段.push(`标签：${Array.from(选中标签集合).join(", ")}`);
+            const 提示 = 文本片段.length ? `当前筛选：${文本片段.join(" | ")}` : "未设置筛选";
+            // 含搭配统计：当前结果中已加入"天赋搭配"的数量（对应 天赋选择.ts 的 包含搭配 计数）
+            let 搭配命中数 = 0;
+            if (搭配集合.size > 0) {
+                当前结果集.forEach(项 => { if (搭配集合.has(项.键)) 搭配命中数++; });
+            }
+            const 搭配提示 = 搭配命中数 > 0 ? `（其中搭配中 <b>${搭配命中数}</b> 个）` : "";
+            筛选状态文本.innerHTML = `${提示} · 显示 <b>${当前结果集.length}</b> / <b>${获取统计天赋数组().length}</b> 个天赋${搭配提示}`;
+            渲染分布条();
+        }
+
+        // 魔堕（潜力 < -5）与神启（潜力 > 5）各自合并为一个档位统计
+        function 潜力归并档(潜力值) {
+            if (潜力值 > 5) return 6;
+            if (潜力值 < -5) return -6;
+            return 潜力值;
+        }
+
+        function 渲染分布条() {
+            应用效果文案();
+            const 计数 = {};
+            当前结果集.forEach(项 => {
+                const 档 = 潜力归并档(项.消耗);
+                计数[档] = (计数[档] || 0) + 1;
+            });
+            const 片段 = document.createDocumentFragment();
+            潜力颜色对照表.forEach(项 => {
+                const 数量 = 计数[项.潜力] || 0;
+                const 分布元素 = document.createElement("div");
+                分布元素.className = "分布段";
+                分布元素.style.flexGrow = 数量;
+                分布元素.style.background = 项.颜色;
+                const 档名 = 项.潜力 > 5 ? "神启" : 项.潜力 < -5 ? "魔堕" : `${项.潜力}`;
+                分布元素.title = `${潜力称谓()} ${档名}：${数量} 个`;
+                if (数量 > 0) 分布元素.style.minWidth = "6px";
+                片段.appendChild(分布元素);
+            });
+            潜力分布条.replaceChildren(片段);
+        }
+
+        /** 同步卡片的选中样式（互斥取消后需要连带取消高亮） */
+        function 同步卡片选中态() {
+            document.querySelectorAll(".天赋名字卡片").forEach(卡片 => {
+                const 项 = 当前结果集[Number(卡片.dataset.索引)];
+                if (!项) return;
+                卡片.classList.toggle("搭配选中", 搭配集合.has(项.键));
+            });
+        }
+
+        /** 收集当前搭配中所有互斥对里双向都存在冲突的天赋名 */
+        function 收集所有互斥冲突键() {
+            const 冲突集 = new Set();
+            搭配集合.forEach(名称 => {
+                const 需踢 = 天赋互斥表[名称];
+                if (!需踢) return;
+                需踢.forEach(目标 => {
+                    if (搭配集合.has(目标)) {
+                        冲突集.add(名称);
+                        冲突集.add(目标);
+                    }
+                });
+            });
+            return 冲突集;
+        }
+
+        // 动态题记（如【霸权国际】按「道」）随搭配变化实时重算
+        function 刷新动态题记() {
+            if (!当前弹窗数据 || typeof 当前弹窗数据.题记 !== "function") return;
+            try {
+                const 新题记 = 当前弹窗数据.题记();
+                弹窗元素集.题记.innerHTML = 渲染技能名颜色(高亮文本(String(新题记), 搜索输入框.value.trim()));
+            } catch (错误) { }
+        }
+        function 更新搭配面板() {
+            应用效果文案();
+            if (搭配集合.size === 0) {
+                搭配已选.innerHTML = `<span class="搭配空提示">点击卡片选择天赋</span>`;
+                搭配总计.textContent = "0";
+                刷新动态题记();
+                return;
+            }
+            let 超文本 = "";
+            let 总消耗 = 0;
+            搭配集合.forEach(名称 => {
+                const 项 = 天赋名索引.get(名称);
+                if (!项) return;
+                总消耗 += 项.消耗;
+                超文本 += `<span class="搭配项"><i style="color:${获取潜力颜色(项.消耗)}">${项.消耗 > 0 ? "+" : ""}${格式化潜力(项.消耗)}</i>${渲染显示名(项)}</span>`;
+            });
+            搭配已选.innerHTML = 超文本;
+            搭配总计.textContent = `${总消耗 > 0 ? "+" : ""}${格式化潜力(总消耗)}`;
+            刷新动态题记();
+        }
+        document.getElementById("搭配清空按钮").onclick = function () {
+            搭配集合.clear();
+            document.querySelectorAll(".天赋名字卡片").forEach(卡片 => 卡片.classList.remove("搭配选中"));
+            更新搭配面板();
+        };
+
+        function 绑定标签点击() {
+            document.querySelectorAll(".标签按钮").forEach(按钮 => {
+                按钮.addEventListener("click", () => {
+                    const 值 = 按钮.dataset.值;
+                    if (按钮.dataset.类型 === "潜力") {
+                        const 数值 = Number(值);
+                        if (选中潜力集合.has(数值)) 选中潜力集合.delete(数值);
+                        else 选中潜力集合.add(数值);
+                        更新潜力按钮样式();
+                        更新标签计数();
+                    } else {
+                        if (选中标签集合.has(值)) {
+                            选中标签集合.delete(值);
+                            按钮.classList.remove("选中");
+                        } else {
+                            选中标签集合.add(值);
+                            按钮.classList.add("选中");
+                        }
+                        if (值 === "艺术") 更新标签计数();
+                    }
+                    刷新页面渲染();
+                    保存存储();
+                })
+            })
+        }
+
+        function 绑定天赋卡片事件() {
+            const 容器 = 天赋列表容器;
+
+            容器.addEventListener("mouseover", (事件) => {
+                if (!支持悬停) return;
+                const 卡片 = 事件.target.closest(".天赋名字卡片");
+                if (!卡片) return;
+                clearTimeout(关闭延时计时器);
+                clearTimeout(打开延时计时器);
+                打开延时计时器 = setTimeout(() => {
+                    打开弹窗(卡片, 当前结果集[Number(卡片.dataset.索引)]);
+                }, 打开延时);
+            });
+
+            容器.addEventListener("mouseout", (事件) => {
+                if (!支持悬停) return;
+                const 卡片 = 事件.target.closest(".天赋名字卡片");
+                if (!卡片) return;
+                clearTimeout(打开延时计时器);
+                关闭延时计时器 = setTimeout(() => {
+                    if (弹窗固定) return;
+                    if (!全局弹窗.matches(":hover")) {
+                        关闭弹窗();
+                    }
+                }, 关闭延时);
+            });
+
+            容器.addEventListener("click", (事件) => {
+                const 卡片 = 事件.target.closest(".天赋名字卡片");
+                if (!卡片) return;
+                if (长按已触发) { 长按已触发 = false; return; }
+                事件.stopPropagation();
+                自动预览中 = false; // 手动点击接管弹窗控制权
+                const 项 = 当前结果集[Number(卡片.dataset.索引)];
+                // 点击卡片直接弹出详情弹窗（手机端没有 hover，长按又容易触发文本选择）
+                打开弹窗(卡片, 项);
+                if (项.标签.includes("艺术")) {
+                    卡片.classList.remove("不可选抖动");
+                    void 卡片.offsetWidth;
+                    卡片.classList.add("不可选抖动");
+                    setTimeout(() => 卡片.classList.remove("不可选抖动"), 350);
+                    return;
+                }
+                const 纯名 = 项.键;
+                if (搭配集合.has(纯名)) {
+                    搭配集合.delete(纯名);
+                } else {
+                    if (!搭配集合.has("补缀乾坤")) {
+                        const 需踢 = 天赋互斥表[纯名];
+                        if (需踢) 需踢.forEach(冲突 => 搭配集合.delete(冲突));
+                        if (纯名 === "傲慢") {
+                            Object.entries(天赋表).forEach(([其他名, 其他]) => {
+                                if (其他名 === "傲慢") return;
+                                if (!(其他.消耗 < 0)) return;
+                                if (搭配集合.has(其他名)) 搭配集合.delete(其他名);
+                            });
+                        } else if (项.消耗 < 0 && 搭配集合.has("傲慢")) {
+                            搭配集合.delete("傲慢");
+                        }
+                    }
+                    搭配集合.add(纯名);
+                }
+                同步卡片选中态();
+                更新搭配面板();
+            });
+
+            容器.addEventListener("touchstart", (事件) => {
+                const 卡片 = 事件.target.closest(".天赋名字卡片");
+                if (!卡片) return;
+                长按已触发 = false;
+                clearTimeout(长按计时器);
+                长按计时器 = setTimeout(() => {
+                    长按已触发 = true;
+                    打开弹窗(卡片, 当前结果集[Number(卡片.dataset.索引)]);
+                }, 长按时间);
+            }, { passive: true });
+
+            const 清除长按 = () => { clearTimeout(长按计时器); };
+            容器.addEventListener("touchmove", 清除长按, { passive: true });
+            容器.addEventListener("touchend", 清除长按);
+            容器.addEventListener("touchcancel", () => { 清除长按(); 长按已触发 = false; });
+        }
+
+        清空筛选按钮.onclick = function () {
+            选中潜力集合.clear();
+            选中标签集合.clear();
+            document.querySelectorAll(".标签按钮.普通标签").forEach(按钮 => 按钮.classList.remove("选中"));
+            更新标签计数();
+            更新潜力按钮样式();
+            刷新页面渲染();
+            保存存储();
+        }
+
+        切换明暗按钮.addEventListener("click", () => {
+            主体.classList.toggle("亮色模式");
+            更新潜力按钮样式();
+            渲染分布条();
+            刷新页面渲染();
+            保存存储();
+        })
+
+        function 打开弹窗(卡片元素, 天赋数据) {
+            当前卡片 = 卡片元素;
+            当前弹窗数据 = 天赋数据;
+            const 矩形 = 卡片元素.getBoundingClientRect();
+            // 可用视口（兼容手机缩放/地址栏收缩）
+            const 视口高 = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+            const 视口宽 = (window.visualViewport && window.visualViewport.width) || window.innerWidth;
+            const 外边距 = 12;
+            // 先限制高度再测量，避免超高弹窗越界
+            全局弹窗.style.maxHeight = Math.max(160, 视口高 - 外边距 * 2) + "px";
+            const 滚动区 = 全局弹窗.querySelector(".弹窗滚动区");
+            if (滚动区) 滚动区.scrollTop = 0;
+            const 搜索词 = 搜索输入框.value.trim();
+            弹窗元素集.名称.innerHTML = 渲染显示超文本(天赋数据);
+            弹窗元素集.名称.style.color = 获取潜力颜色(天赋数据.消耗);
+            // 盗版国际：潜力点改称感动值；正面天赋的相关信息不可见
+            弹窗元素集.潜力标记.textContent = 搭配集合.has("盗版国际")
+                ? (应遮蔽正面信息(天赋数据.消耗) ? "感动值：？" : `感动值：${格式化潜力(天赋数据.消耗)}`)
+                : `消耗：${格式化潜力(天赋数据.消耗)}`;
+            let 标签超文本 = "";
+            天赋数据.标签.forEach(单个标签 => {
+                let 标签class = "标签";
+                if (单个标签 === "艺术") 标签class += " 艺术标签";
+                else if (单个标签 === "天工") 标签class += " 天工标签";
+                else if (单个标签 === "圣哲芳规") 标签class += " 圣哲芳规标签";
+                else if (单个标签 === "狂愚覆辙") 标签class += " 狂愚覆辙标签";
+                标签超文本 += `<span class="${标签class}">${单个标签}</span>`;
+            });
+            // 共创金色标签
+            if (天赋数据.共创) {
+                标签超文本 += `<span style="background:linear-gradient(120deg,#FFD700,#FFF8DC,#FFA500,#FFD700);background-size:200% 100%;color:#3a2400;padding:2px 10px;border-radius:10px;margin-left:6px;font-size:12px;border:1px solid #FFD700;animation:金色流光 3s linear infinite;">共创·${天赋数据.共创}</span>`;
+            }
+            弹窗元素集.标签行.innerHTML = 标签超文本;
+            let 题记内容 = 天赋数据.题记;
+            if (typeof 题记内容 === "function") {
+                try { 题记内容 = 题记内容(); } catch (错误) { 题记内容 = ""; }
+            }
+            if (Array.isArray(题记内容)) {
+                题记内容 = 题记内容[Math.floor(Math.random() * 题记内容.length)];
+            }
+            弹窗元素集.题记.innerHTML = 渲染技能名颜色(高亮文本(应用避讳(题记内容), 搜索词));
+            弹窗元素集.描述.innerHTML = 应遮蔽正面信息(天赋数据.消耗)
+                ? 遮蔽提示文本
+                : 渲染技能名颜色(高亮文本(应用避讳(天赋数据.描述), 搜索词));
+            // 引用来源
+            if (天赋数据.引用 && 天赋数据.引用.length > 0) {
+                弹窗元素集.引用.innerHTML = "引用：" + 天赋数据.引用.map(s => `<span style="opacity:0.85">${s}</span>`).join(" · ");
+            } else {
+                弹窗元素集.引用.innerHTML = "";
+            }
+            // 提到人物
+            if (天赋数据.提到 && 天赋数据.提到.length > 0) {
+                弹窗元素集.提到.innerHTML = "提到：" + 天赋数据.提到.map(s => `<span style="opacity:0.85">${s}</span>`).join(" · ");
+            } else {
+                弹窗元素集.提到.innerHTML = "";
+            }
+            弹窗元素集.备注.innerHTML = 渲染技能名颜色(高亮文本(天赋数据.备注, 搜索词));
+            全局弹窗.classList.toggle("艺术弹窗", 天赋数据.标签.includes("艺术"));
+            全局弹窗.classList.toggle("天工弹窗", 天赋数据.标签.includes("天工"));
+            全局弹窗.style.visibility = "hidden";
+            全局弹窗.classList.add("显示");
+            const 弹窗高 = 全局弹窗.offsetHeight;
+            const 弹窗宽 = 全局弹窗.offsetWidth;
+            全局弹窗.classList.remove("显示");
+            全局弹窗.style.visibility = "";
+
+            let 顶部 = 矩形.bottom + 外边距;
+            let 左侧 = 矩形.left;
+            let 在下方 = true;
+
+            // 下方放不下则翻到上方
+            if (顶部 + 弹窗高 > 视口高 - 外边距) {
+                顶部 = 矩形.top - 弹窗高 - 外边距;
+                在下方 = false;
+            }
+            // 上方也放不下：贴顶显示，剩余内容在弹窗内部滚动
+            if (顶部 < 外边距) 顶部 = 外边距;
+            if (顶部 + 弹窗高 > 视口高 - 外边距) {
+                顶部 = Math.max(外边距, 视口高 - 弹窗高 - 外边距);
+            }
+            if (左侧 + 弹窗宽 > 视口宽 - 外边距) {
+                左侧 = 视口宽 - 弹窗宽 - 外边距;
+            }
+            if (左侧 < 外边距) 左侧 = 外边距;
+
+            全局弹窗.style.left = 左侧 + "px";
+            全局弹窗.style.top = 顶部 + "px";
+            全局弹窗.style.transformOrigin = 在下方 ? "top center" : "bottom center";
+            全局弹窗.classList.add("显示");
+        }
+
+        function 渲染天赋列表(筛选后数组) {
+            const 容器 = 天赋列表容器;
+            if (筛选后数组.length <= 0) {
+                容器.innerHTML = `<div class="无结果提示">没有找到匹配的天赋，请更换关键词/筛选条件</div>`;
+                键盘选中索引 = -1;
+                return;
+            }
+
+
+            let 超文本累积 = "";
+            for (let i = 0; i < 筛选后数组.length; i++) {
+                const 当前天赋 = 筛选后数组[i];
+                let 卡片class = "天赋名字卡片";
+                if (当前天赋.标签.includes("艺术")) 卡片class += " 艺术卡片";
+                if (当前天赋.标签.includes("天工")) 卡片class += " 天工卡片";
+                if (搭配集合.has(当前天赋.键)) 卡片class += " 搭配选中";
+
+                const 天赋纯名 = 渲染显示名(当前天赋);
+                // 盗版国际：正面天赋的相关信息不可见（不显示潜力后缀）
+                const 潜力后缀 = 应遮蔽正面信息(当前天赋.消耗)
+                    ? ""
+                    : ((当前天赋.消耗 > 5 || 当前天赋.消耗 < -5)
+                        ? (当前天赋.消耗 >= 0 ? ` <span style="opacity:0.8">+${格式化潜力(当前天赋.消耗)}</span>` : ` <span style="opacity:0.8">${格式化潜力(当前天赋.消耗)}</span>`)
+                        : "");
+                // 仅前 12 张应用入场动画延迟，避免大量卡片同时动画卡顿
+                超文本累积 += `<div class="${卡片class}" data-索引="${i}" style="animation-delay:${i < 12 ? i * 30 : 0}ms"><span style="color:${获取潜力颜色(当前天赋.消耗)}">${天赋纯名}${潜力后缀}</span></div>`;
+            }
+            容器.innerHTML = 超文本累积;
+            键盘选中索引 = -1;
+        }
+
+        // ===== 精确命中或结果唯一时自动选中并弹出详情=====
+        let 自动预览中 = false;
+
+        /** 归一化用于精确比对：纯文本 + 去空白 + 小写 */
+        function 归一关键词(值) {
+            return 搜索纯文本(值).toLowerCase().replace(/\s+/g, "");
+        }
+
+        /** 取自动选中下标：关键词等于天赋名 → 该天赋；结果唯一 → 唯一项；否则 -1 */
+        function 取自动选中目标() {
+            const 关键词 = 归一关键词(搜索输入框.value);
+            if (!关键词) return -1;
+            const 精确下标 = 当前结果集.findIndex(项 => 归一关键词(天赋显示名(项)) === 关键词);
+            if (精确下标 >= 0) return 精确下标;
+            if (当前结果集.length === 1) return 0;
+            return -1;
+        }
+
+        /** 自动选中并预览；返回是否已自动弹出 */
+        function 自动更新详情栏() {
+            const 下标 = 取自动选中目标();
+            const 卡片集 = Array.from(天赋列表容器.querySelectorAll(".天赋名字卡片"));
+            if (下标 < 0 || 卡片集.length === 0) {
+                // 关键词被删空 / 结果不再唯一：收起上一次的自动预览，避免弹窗残留
+                if (自动预览中) {
+                    自动预览中 = false;
+                    关闭弹窗();
+                    键盘选中索引 = -1;
+                    卡片集.forEach(卡片 => 卡片.classList.remove("键盘选中"));
+                }
+                return false;
+            }
+            键盘选中索引 = Math.min(下标, 卡片集.length - 1);
+            高亮键盘选中(卡片集);
+            弹窗固定 = true; // 输入态下固定弹窗，避免鼠标移出卡片后立刻收起
+            自动预览中 = true;
+            return true;
+        }
+
+        // ===== 联想搜索：把带 HTML（<br>/<span>/<rt>）的字段转成纯文本参与匹配 =====
+        const 搜索纯文本缓存 = new Map();
+        function 搜索纯文本(值) {
+            if (!值) return "";
+            if (typeof 值 === "function") {
+                try { 值 = 值(); } catch (错误) { return ""; }
+                if (!值) return "";
+                if (Array.isArray(值)) return 值.map(搜索纯文本).join("");
+            }
+            if (Array.isArray(值)) return 值.map(搜索纯文本).join("");
+            const 文本 = String(值);
+            if (文本.indexOf("<") < 0) return 文本;
+            if (搜索纯文本缓存.has(文本)) return 搜索纯文本缓存.get(文本);
+            const 结果 = 文本.replace(/<rt>[\s\S]*?<\/rt>/g, "").replace(/<[^>]+>/g, "");
+            搜索纯文本缓存.set(文本, 结果);
+            return 结果;
+        }
+
+        /**
+         * 筛选逻辑
+         * 1. 潜力筛选：选中潜力集合非空 → 天赋潜力必须匹配任意选中潜力；空则不限潜力
+         * 2. 标签筛选：选中标签集合非空 → 天赋标签匹配任意选中标签；空则不限标签
+         * 3. 艺术天赋：只有显式勾选"艺术"标签才允许展示
+         * 4. 最终条件：潜力条件通过 AND 标签条件通过
+         * 5. 关键词：联想搜索（移植自 天赋选择.ts），按 天赋名>题记>描述>共创>引用>提到 加权排序（备注与标签不参与检索）
+         */
+        function 筛选天赋(原始关键词) {
+            const 关键词 = 原始关键词.toLowerCase().trim();
+
+            let 待筛选 = 获取潜力筛选后数组().filter(项 => {
+                if (选中标签集合.size > 0) {
+                    if (选中标签集合.has("共创") && !项.共创) return false;
+                    const 普通选中标签 = [...选中标签集合].filter(t => t !== "共创");
+                    if (普通选中标签.length > 0 && !项.标签.some(单个标签 => 普通选中标签.includes(单个标签))) return false;
+                }
+                return true;
+            })
+
+            if (!关键词) return 待筛选;
+
+            // ===== 联想搜索=====
+            // 优先级：天赋名 > 题记 > 描述 > 共创 > 引用> 提到
+            // 备注与标签噪音太大，不参与检索
+            const 打分 = 待筛选.map(一项天赋 => {
+                let 分数 = 0;
+                const 名称文本 = String(一项天赋.键);
+                const 题记文本 = 搜索纯文本(一项天赋.题记);
+                const 描述文本 = 搜索纯文本(一项天赋.描述);
+                const 共创文本 = 搜索纯文本(一项天赋.共创);
+                const 引用列表 = Array.isArray(一项天赋.引用) ? 一项天赋.引用 : (一项天赋.引用 ? [一项天赋.引用] : []);
+                const 提到列表 = Array.isArray(一项天赋.提到) ? 一项天赋.提到 : (一项天赋.提到 ? [一项天赋.提到] : []);
+
+                if (名称文本.toLowerCase().includes(关键词)) 分数 = 6;
+                else if (题记文本.toLowerCase().includes(关键词)) 分数 = 5;
+                else if (描述文本.toLowerCase().includes(关键词)) 分数 = 4;
+                else if (共创文本 && 共创文本.toLowerCase().includes(关键词)) 分数 = 3;
+                else if (引用列表.some(单 => 搜索纯文本(单).toLowerCase().includes(关键词))) 分数 = 2;
+                else if (提到列表.some(单 => 搜索纯文本(单).toLowerCase().includes(关键词))) 分数 = 1;
+
+                return { 天赋: 一项天赋, 得分: 分数 };
+            });
+
+            return 打分.filter(项 => 项.得分 > 0)
+                .sort((前, 后) => 后.得分 - 前.得分)
+                .map(项 => 项.天赋);
+        }
+
+        function 刷新页面渲染() {
+            当前结果集 = 筛选天赋(搜索输入框.value);
+            渲染天赋列表(当前结果集);
+            更新筛选状态();
+        }
+
+        搜索输入框.addEventListener("input", () => {
+            clearTimeout(搜索防抖定时器);
+            搜索防抖定时器 = setTimeout(() => {
+                刷新页面渲染();
+                自动更新详情栏();
+                保存存储();
+            }, 180);
+        });
+
+        function 高亮键盘选中(卡片集) {
+            const 目标 = 卡片集[键盘选中索引];
+            卡片集.forEach(卡片 => 卡片.classList.remove("键盘选中"));
+            目标.classList.add("键盘选中");
+            目标.scrollIntoView({ block: "nearest" });
+            打开弹窗(目标, 当前结果集[Number(目标.dataset.索引)]);
+        }
+        document.addEventListener("keydown", (事件) => {
+            if (事件.key === "Escape") {
+                if (全局弹窗.classList.contains("显示")) {
+                    关闭弹窗();
+                }
+                return;
+            }
+            if (document.activeElement === 搜索输入框) return;
+            const 卡片集 = Array.from(document.querySelectorAll(".天赋名字卡片"));
+            if (卡片集.length === 0) return;
+            自动预览中 = false;
+
+            if (事件.key === "ArrowRight" || 事件.key === "ArrowLeft") {
+                事件.preventDefault();
+                if (键盘选中索引 < 0) {
+                    键盘选中索引 = 0;
+                } else {
+                    键盘选中索引 = (键盘选中索引 + (事件.key === "ArrowRight" ? 1 : -1) + 卡片集.length) % 卡片集.length;
+                }
+                高亮键盘选中(卡片集);
+            } else if (事件.key === "Enter") {
+                事件.preventDefault();
+                if (键盘选中索引 < 0) 键盘选中索引 = 0;
+                弹窗固定 = true;
+                高亮键盘选中(卡片集);
+            }
+        });
+
+        const 已存 = 读取存储();
+        if (已存.亮色) 主体.classList.add("亮色模式");
+        (已存.潜力筛选 || []).forEach(值 => 选中潜力集合.add(Number(值)));
+        (已存.标签筛选 || []).forEach(值 => {
+            if (标签集.includes(值)) 选中标签集合.add(值);
+        });
+
+        初始化普通标签();
+        初始化潜力标签();
+        绑定标签点击();
+        绑定天赋卡片事件();
+
+        document.querySelectorAll(".标签按钮.普通标签").forEach(按钮 => {
+            if (选中标签集合.has(按钮.dataset.值)) 按钮.classList.add("选中");
+        });
+        更新潜力按钮样式();
+        搜索输入框.value = 已存.搜索词 || "";
+        更新搭配面板();
+        刷新页面渲染();
+    </script>
+</body>
+
+</html>

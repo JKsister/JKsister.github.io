@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>流浪国际</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- 顶部导航 -->
+  <nav class="顶部导航">
+    <div class="导航内部">
+      <div class="导航链接">
+        <a href="#项目介绍">项目介绍</a>
+        <a href="#游戏截图">游戏截图</a>
+        <a href="#更新日志">更新日志</a>
+        <a href="#贡献者">贡献者</a>
+        <a href="#官方社群">社群</a>
+        <a href="#下载">下载</a>
+        <a href="#赞助">帮助</a>
+      </div>
+      <button class="主题切换" id="主题按钮">切换亮色/暗色</button>
+    </div>
+  </nav>
+
+  <div class="页面容器">
+    <div class="主内容区">
+      <!-- ========== 1. 头部标题区 ========== -->
+      <header class="头部" id="头部">
+        <h1 class="主标题">流浪国际</h1>
+        <p class="副标题">开源共创游戏项目</p>
+      </header>
+
+      <!-- ========== 2. 项目介绍 ========== -->
+      <section class="板块 淡入区块" id="项目介绍">
+        <h2 class="板块标题">项目介绍</h2>
+        <div class="游戏图标展示">
+          <img class="游戏图标大图" src="图片/游戏图标.png" alt="流浪国际 游戏图标"
+            onerror="this.style.display='none';this.parentElement.classList.add('无图')">
+        </div>
+        <div class="卡片">
+          <p class="项目介绍文本">
+            目前《流浪国际》仅上线两个基础核心剧本（开始界面左右滑动可以切换版本），涵盖核心玩法，能够满足玩家基础游玩、创作者基础参考与二次创作需求。后续将陆续上线全新游戏版本。未来将持续拓展不同玩法体系、剧情篇章，不断丰富版本内容、完善游戏生态。
+          </p>
+          <p class="项目介绍文本">
+            《流浪国际》不止是一个同人游戏，更是属于所有爱好者的共创平台——<strong>身为开源公益项目，完整工程文件将永远对外完全公开</strong>，欢迎各位爱好者参与内容创作、版本优化、玩法拓展，共同丰富《流浪日记》的游戏生态！
+          </p>
+        </div>
+      </section>
+
+      <!-- ========== 3. 游戏截图画廊 ========== -->
+      <section class="板块 淡入区块" id="游戏截图">
+        <h2 class="板块标题">游戏截图</h2>
+        <div class="画廊网格" id="画廊网格">
+          <div class="画廊缩略图" data-full="图片/截图/游戏截图1.jpg">
+            <img src="图片/截图/游戏截图1.jpg" alt="游戏截图1"
+              onerror="this.style.display='none';this.parentElement.classList.add('无图')">
+          </div>
+          <div class="画廊缩略图" data-full="图片/截图/游戏截图2.jpg">
+            <img src="图片/截图/游戏截图2.jpg" alt="游戏截图2"
+              onerror="this.style.display='none';this.parentElement.classList.add('无图')">
+          </div>
+          <div class="画廊缩略图" data-full="图片/截图/游戏截图3.jpg">
+            <img src="图片/截图/游戏截图3.jpg" alt="游戏截图3"
+              onerror="this.style.display='none';this.parentElement.classList.add('无图')">
+          </div>
+          <div class="画廊缩略图" data-full="图片/截图/游戏截图4.jpg">
+            <img src="图片/截图/游戏截图4.jpg" alt="游戏截图4"
+              onerror="this.style.display='none';this.parentElement.classList.add('无图')">
+          </div>
+          <div class="画廊缩略图" data-full="图片/截图/游戏截图5.jpg">
+            <img src="图片/截图/游戏截图5.jpg" alt="游戏截图5"
+              onerror="this.style.display='none';this.parentElement.classList.add('无图')">
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 4. 更新日志（折叠卡片） ========== -->
+      <section class="板块 淡入区块" id="更新日志">
+        <h2 class="板块标题">更新日志</h2>
+        <div class="更新日志列表">
+
+          <!-- 最新版本（默认展开） -->
+          <div class="更新日志卡片 最新版 展开" data-version="1.4.3">
+            <button class="更新日志头部" type="button" aria-expanded="true">
+              <span class="版本号标签">v 1.4.3【若自】</span>
+              <span class="更新时间">2026-11-08</span>
+              <span class="最新标记">最新版本</span>
+              <svg class="更新日志箭头" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+            <div class="更新日志内容">
+              <div class="更新日志内文">
+                <ul class="更新列表">
+                  <li class="更新条目">
+                    <span class="更新条目前缀">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </span>
+                    <span>1.修复已知bug，并添加了更多的bug</span>
+                  </li>
+                  <li class="更新条目">
+                    <span class="更新条目前缀">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </span>
+                    <span>2.新增少量天赋</span>
+                  </li>
+                  <li class="更新条目">
+                    <span class="更新条目前缀">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </span>
+                    <span>3.UI优化</span>
+                  </li>
+                  <li class="更新条目">
+                    <span class="更新条目前缀">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </span>
+                    <span>4.润色部分剧情</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 历史版本（默认收起） -->
+
+        </div>
+      </section>
+
+      <!-- ========== 5. 贡献者列表 ========== -->
+      <section class="板块 淡入区块" id="贡献者">
+        <h2 class="板块标题">贡献者</h2>
+        <div class="贡献者网格">
+          <div class="贡献者卡片">
+            <div class="贡献者头像" title="贡献者头像">
+              <img src="图片/头像/大哥哥坤坤.png" alt="大哥哥坤坤"
+                onerror="this.style.display='none';this.parentElement.innerText='坤'">
+            </div>
+            <div class="贡献者名称">大哥哥坤坤</div>
+            <div class="贡献者职责">联合国秘书长 / 主策划</div>
+            <div class="贡献者签名">为人民服务</div>
+          </div>
+          <div class="贡献者卡片">
+            <div class="贡献者头像" title="贡献者头像">
+              <img src="图片/头像/JK姐不穿JK.jpg" alt="JK姐不穿JK头像"
+                onerror="this.style.display='none';this.parentElement.innerText='JK'">
+            </div>
+            <div class="贡献者名称">JK姐不穿JK</div>
+            <div class="贡献者职责">负责人 / 主程序 </div>
+            <div class="贡献者签名">努力不一定成功，但放弃一定很轻松</div>
+          </div>
+          <div class="贡献者卡片">
+            <div class="贡献者头像" title="贡献者头像">
+              <img src="图片/头像/刘一.jpg" alt="刘一头像" onerror="this.style.display='none';this.parentElement.innerText='刘'">
+            </div>
+            <div class="贡献者名称">刘一</div>
+            <div class="贡献者职责">合伙人 / 流浪日记二创先驱</div>
+            <div class="贡献者签名">昔人已乘黄鹤去，此地空余黄鹤楼</div>
+          </div>
+          <div class="贡献者卡片">
+            <div class="贡献者头像" title="贡献者头像">
+              <img src="图片/头像/梦半何时醒.jpg" alt="梦半何时醒头像"
+                onerror="this.style.display='none';this.parentElement.innerText='梦'">
+            </div>
+            <div class="贡献者名称">梦半何时醒</div>
+            <div class="贡献者职责">赞助者</div>
+            <div class="贡献者签名">痴人说着梦，都道情之所钟</div>
+          </div>
+          <div class="贡献者卡片 贡献者招募卡">
+            <div class="贡献者头像">+</div>
+            <div class="贡献者名称">等你加入</div>
+            <div class="贡献者职责">内容创作 / 玩法拓展</div>
+            <div class="贡献者签名">请输入文本</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 6. 官方社群 ========== -->
+      <section class="板块 淡入区块" id="官方社群">
+        <h2 class="板块标题">官方社群</h2>
+        <div class="卡片" style="margin-bottom:18px;">
+          <p class="项目介绍文本" style="margin-bottom:14px;">
+            遇到 Bug、闪退、文本错误或异常表现，欢迎进群反馈。反馈时请详细说明出现 Bug 的具体场景，有截图或录屏更佳，开发组会 <ruby>尽快<rt>30个工作日内</rt></ruby> 处理，进度在群内同步。
+          </p>
+          <div class="警告提示框" style="margin-bottom:0;">
+            <span class="警告图标">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                </path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </span>
+            <div class="警告内容">
+              <div class="警告标题">加群建议</div>
+              <div class="警告描述">
+                本项目为开源公益项目，本着节约美德，请<strong>优先在官方 QQ 群内获取最新版本</strong>，下载速度更快，也避免占用网站流量
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="社群卡片网格">
+          <div class="社群卡片" data-copy="640021797">
+            <div class="头像框" title="群头像">
+              <img src="图片/游戏图标.png" width="60" height="60" alt="联合国总部群头像" onerror="this.style.display='none'">
+            </div>
+            <div class="社群信息">
+              <div class="社群名称">联合国总部</div>
+              <div class="社群号码">640021797</div>
+              <div style="font-size:12px;color:var(--辅助文字色)">点击复制群号</div>
+            </div>
+          </div>
+          <div class="社群卡片" data-copy="1018046022">
+            <div class="头像框" title="群头像">
+              <img src="图片/头像/非闲勿扰.jpg" width="60" height="60" alt="非闲勿扰群头像" onerror="this.style.display='none'">
+            </div>
+            <div class="社群信息">
+              <div class="社群名称">非闲勿扰群（流浪日记联合群）</div>
+              <div class="社群号码">1018046022</div>
+              <div style="font-size:12px;color:var(--辅助文字色)">点击复制群号</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 8. 开发者联系方式 ========== -->
+      <section class="板块 淡入区块" id="联系方式">
+        <h2 class="板块标题">联系联合国秘书长</h2>
+        <div class="联系卡片网格">
+          <div class="联系卡片" data-copy="373038420">
+            <div class="头像框" title="QQ头像">
+              <img src="图片/头像/大哥哥坤坤.png" width="60" height="60" alt="QQ头像" onerror="this.style.display='none'">
+            </div>
+            <div class="联系信息">
+              <span class="联系平台">QQ</span>
+              <span class="联系人昵称">大哥哥坤坤</span>
+              <span class="联系账号">373038420</span>
+              <div style="font-size:12px;color:var(--辅助文字色)">点击复制账号</div>
+            </div>
+          </div>
+          <div class="联系卡片" data-copy="16659312985">
+            <div class="头像框" title="微信头像">
+              <img src="图片/头像/JK姐不穿JK.jpg" width="60" height="60" alt="微信头像" onerror="this.style.display='none'">
+            </div>
+            <div class="联系信息">
+              <span class="联系平台">微信</span>
+              <span class="联系人昵称">JK姐不穿JK</span>
+              <span class="联系账号">16659312985</span>
+              <div style="font-size:12px;color:var(--辅助文字色)">点击复制账号</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 9. 客户端下载 ========== -->
+      <section class="板块 淡入区块" id="下载">
+        <h2 class="板块标题">客户端下载</h2>
+        <div class="卡片">
+          <div class="下载按钮组">
+            <a href="资源/流浪国际.apk" class="下载按钮 下载按钮--主">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+              </svg>
+              安卓下载
+            </a>
+            <a href="资源/流浪国际桌面端.7z" class="下载按钮 下载按钮--次">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+              Windows 下载
+            </a>
+            <a href="资源/流浪国际工程文件.7z" class="下载按钮 下载按钮--源码">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+              下载源码
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 10. 网页在线体验 ========== -->
+      <section class="板块 淡入区块" id="网页体验">
+        <h2 class="板块标题">网页在线体验</h2>
+        <div class="卡片">
+          <div class="警告提示框">
+            <span class="警告图标">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                </path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </span>
+            <div class="警告内容">
+              <div class="警告标题">性能提示</div>
+              <div class="警告描述">
+                网页版运行性能较差、比较卡顿，建议玩家优先下载客户端游玩，以获得更流畅的游戏体验。
+              </div>
+            </div>
+          </div>
+          <div class="网页体验按钮组">
+            <a href="h5/index.html" class="网页体验按钮">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+              网页体验
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 11. 赞助 ========== -->
+      <section class="板块 淡入区块" id="赞助">
+        <h2 class="板块标题">帮助</h2>
+        <div class="帮助卡片" id="帮助卡片">
+          <button class="帮助头部" type="button" aria-expanded="false">
+            <svg class="帮助图标" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+              </path>
+            </svg>
+            <span>项目帮助</span>
+            <span class="帮助头部说明">点击展开详细</span>
+            <svg class="帮助箭头" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+          <div class="帮助内容">
+            <div class="帮助内文">
+              <div class="收款码组">
+                <div class="收款码项">
+                  <div class="收款码框">
+                    <img src="图片/收款码/微信.png" alt="微信收款码"
+                      onerror="this.style.display='none';this.parentElement.classList.add('无码')">
+                  </div>
+                  <div class="收款码标签">微信</div>
+                </div>
+                <div class="收款码项">
+                  <div class="收款码框">
+                    <img src="图片/收款码/支付宝.jpg" alt="支付宝收款码"
+                      onerror="this.style.display='none';this.parentElement.classList.add('无码')">
+                  </div>
+                  <div class="收款码标签">支付宝</div>
+                </div>
+              </div>
+              <p class="帮助说明">
+                支持站点，这是<strong>助力流浪日记复兴的关键渠道</strong>！
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <!-- ========== 12. 页脚 ========== -->
+    <footer class="页脚" id="页脚">
+      <p class="页脚文本">
+        <strong>流浪国际</strong> © 2026 开源公益共创项目
+      </p>
+    </footer>
+
+    <!-- 提示框元素 -->
+    <div class="提示框" id="提示"></div>
+
+    <!-- 截图画廊弹窗 -->
+    <div class="画廊弹窗" id="画廊弹窗">
+      <button class="画廊弹窗关闭" id="画廊弹窗关闭" aria-label="关闭预览">×</button>
+      <img class="画廊弹窗图片" id="画廊弹窗图片" src="" alt="截图预览">
+    </div>
+  </div>
+
+  <script>
+    const 提示框 = document.getElementById("提示");
+    function 显示提示(消息) {
+      提示框.innerText = 消息;
+      提示框.classList.add("显示中");
+      setTimeout(() => 提示框.classList.remove("显示中"), 1800);
+    }
+
+    // 复制卡片事件
+    document.querySelectorAll(".联系卡片[data-copy], .社群卡片[data-copy], .反馈群号卡[data-copy]").forEach(复制卡片 => {
+      复制卡片.style.cursor = "pointer";
+      复制卡片.addEventListener("click", async function () {
+        const 待复制文本 = this.dataset.copy;
+        this.classList.add("已复制");
+        setTimeout(() => this.classList.remove("已复制"), 300);
+        const 是否群号 = this.classList.contains("社群卡片") || this.classList.contains("反馈群号卡");
+        await 执行复制(待复制文本, 是否群号);
+      })
+    })
+
+    async function 执行复制(文本, 是否群号 = false) {
+      const 提示语 = 是否群号 ? "群号已复制到剪贴板！" : "账号已复制到剪贴板！";
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(文本);
+          显示提示(提示语);
+          return;
+        }
+        // 兼容降级
+        const 临时框 = document.createElement("textarea");
+        临时框.value = 文本;
+        临时框.style.position = "fixed";
+        临时框.style.left = "-9999px";
+        document.body.appendChild(临时框);
+        临时框.select();
+        document.execCommand("copy");
+        临时框.remove();
+        显示提示(提示语);
+      } catch (错误) {
+        显示提示("复制失败，请手动复制文本");
+      }
+    }
+
+    // 明暗切换
+    document.getElementById("主题按钮").addEventListener("click", () => {
+      const 根元素 = document.documentElement;
+      if (根元素.classList.contains("亮色主题")) {
+        根元素.classList.remove("亮色主题");
+        根元素.classList.add("暗色主题");
+        显示提示("已切换暗色模式");
+      } else if (根元素.classList.contains("暗色主题")) {
+        根元素.classList.remove("暗色主题");
+        显示提示("跟随系统主题");
+      } else {
+        根元素.classList.add("亮色主题");
+        显示提示("已切换亮色模式");
+      }
+    })
+
+    // ===== 更新日志折叠 =====
+    document.querySelectorAll(".更新日志头部").forEach(日志头部 => {
+      日志头部.addEventListener("click", function () {
+        const 卡片 = this.parentElement;
+        const 展开 = 卡片.classList.toggle("展开");
+        this.setAttribute("aria-expanded", 展开 ? "true" : "false");
+      });
+    });
+
+    // ===== 帮助卡片折叠 =====
+    document.querySelector(".帮助头部").addEventListener("click", function () {
+      const 卡片 = document.getElementById("帮助卡片");
+      const 展开 = 卡片.classList.toggle("展开");
+      this.setAttribute("aria-expanded", 展开 ? "true" : "false");
+    });
+
+    // ===== 滚动淡入 =====
+    const 淡入区块集 = document.querySelectorAll(".淡入区块");
+    if ("IntersectionObserver" in window) {
+      const 观察器 = new IntersectionObserver((条目们) => {
+        条目们.forEach(条目 => {
+          if (条目.isIntersecting) {
+            条目.target.classList.add("已显现");
+            观察器.unobserve(条目.target);
+          }
+        });
+      }, {threshold: 0.12, rootMargin: "0px 0px -40px 0px"});
+      淡入区块集.forEach(元素 => 观察器.observe(元素));
+      // 防止观察器异常导致内容不可见
+      setTimeout(() => {
+        淡入区块集.forEach(元素 => 元素.classList.add("已显现"));
+      }, 3000);
+    } else {
+      // 不支持 IntersectionObserver 则直接全部显现
+      淡入区块集.forEach(元素 => 元素.classList.add("已显现"));
+    }
+
+    // ===== 截图画廊弹窗 =====
+    const 画廊弹窗 = document.getElementById("画廊弹窗");
+    const 画廊弹窗图片 = document.getElementById("画廊弹窗图片");
+
+    document.querySelectorAll(".画廊缩略图").forEach(缩略图 => {
+      缩略图.addEventListener("click", function () {
+        if (this.classList.contains("无图")) return;
+        画廊弹窗图片.src = this.dataset.full;
+        画廊弹窗图片.onerror = function () {
+          this.onerror = null;
+          显示提示("截图加载失败，请确认图片路径");
+        };
+        画廊弹窗.classList.add("显示");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    function 关闭画廊弹窗() {
+      画廊弹窗.classList.remove("显示");
+      document.body.style.overflow = "";
+      画廊弹窗图片.src = "";
+    }
+    document.getElementById("画廊弹窗关闭").addEventListener("click", 关闭画廊弹窗);
+    画廊弹窗.addEventListener("click", function (事件) {
+      if (事件.target === 画廊弹窗) 关闭画廊弹窗();
+    });
+    document.addEventListener("keydown", function (事件) {
+      if (事件.key === "Escape" && 画廊弹窗.classList.contains("显示")) 关闭画廊弹窗();
+    });
+  </script>
+</body>
+
+</html>
